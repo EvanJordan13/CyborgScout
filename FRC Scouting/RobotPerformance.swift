@@ -64,11 +64,12 @@ class RobotPerformance{
     }
     
     func setTeamNumber(number: String) {
-        if ((Int(number) ?? 0) == 0) {
-            print("no can do bud")
-        } else {
+//        if ((Int(number) ?? 0) == 0) {
+//
+//        }
+        //else {
             self.teamNumber = Int(number) ?? 0
-        }
+        //}
         
     }
     
