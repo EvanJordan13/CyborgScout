@@ -97,6 +97,22 @@ class RobotPerformance{
         self.autoLowGoalScored += 1
     }
     
+    func decrementAutoHighGoal() {
+        self.autoHighGoalScored -= 1
+    }
+    
+    func decrementAutoLowGoal() {
+        self.autoLowGoalScored -= 1
+    }
+    
+    func decrementTelopHighGoal() {
+        self.teleopHighGoalScored -= 1
+    }
+    
+    func decrementTeleopLowGoal() {
+        self.autoLowGoalScored -= 1
+    }
+    
     func setClimbStartTime (time: Double) {
         self.climbStartTime = time
     }
