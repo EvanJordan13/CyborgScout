@@ -13,13 +13,9 @@
 		517DFBE9282867AC00109B2D /* FRC_ScoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBE8282867AC00109B2D /* FRC_ScoutingTests.swift */; };
 		517DFBF3282867AC00109B2D /* FRC_ScoutingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF2282867AC00109B2D /* FRC_ScoutingUITests.swift */; };
 		517DFBF5282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */; };
-		517DFC062828687000109B2D /* MatchScoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC012828687000109B2D /* MatchScoutingView.swift */; };
-		517DFC072828687000109B2D /* PitScoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC022828687000109B2D /* PitScoutingView.swift */; };
-		517DFC082828687000109B2D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC032828687000109B2D /* HomeView.swift */; };
-		517DFC092828687000109B2D /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC042828687000109B2D /* ExportView.swift */; };
-		517DFC0A2828687000109B2D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC052828687000109B2D /* ContentView.swift */; };
 		517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0B2828741200109B2D /* RobotSpecs.swift */; };
 		517DFC0E2828742700109B2D /* RobotPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0D2828742700109B2D /* RobotPerformance.swift */; };
+		51ED879728505875006B4771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED879628505875006B4771 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +45,9 @@
 		517DFBEE282867AC00109B2D /* FRC ScoutingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FRC ScoutingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517DFBF2282867AC00109B2D /* FRC_ScoutingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITests.swift; sourceTree = "<group>"; };
 		517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		517DFC012828687000109B2D /* MatchScoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchScoutingView.swift; path = "../../../Test Environment/Test Environment/MatchScoutingView.swift"; sourceTree = "<group>"; };
-		517DFC022828687000109B2D /* PitScoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PitScoutingView.swift; path = "../../../Test Environment/Test Environment/PitScoutingView.swift"; sourceTree = "<group>"; };
-		517DFC032828687000109B2D /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = "../../../Test Environment/Test Environment/HomeView.swift"; sourceTree = "<group>"; };
-		517DFC042828687000109B2D /* ExportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportView.swift; path = "../../../Test Environment/Test Environment/ExportView.swift"; sourceTree = "<group>"; };
-		517DFC052828687000109B2D /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "../../../Test Environment/Test Environment/ContentView.swift"; sourceTree = "<group>"; };
 		517DFC0B2828741200109B2D /* RobotSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotSpecs.swift; sourceTree = "<group>"; };
 		517DFC0D2828742700109B2D /* RobotPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotPerformance.swift; sourceTree = "<group>"; };
+		51ED879628505875006B4771 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +98,9 @@
 		517DFBD6282867A700109B2D /* FRC Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				51ED879628505875006B4771 /* ContentView.swift */,
 				517DFC0D2828742700109B2D /* RobotPerformance.swift */,
 				517DFC0B2828741200109B2D /* RobotSpecs.swift */,
-				517DFC052828687000109B2D /* ContentView.swift */,
-				517DFC042828687000109B2D /* ExportView.swift */,
-				517DFC032828687000109B2D /* HomeView.swift */,
-				517DFC012828687000109B2D /* MatchScoutingView.swift */,
-				517DFC022828687000109B2D /* PitScoutingView.swift */,
 				517DFBD7282867A700109B2D /* FRC_ScoutingApp.swift */,
 				517DFBDB282867AB00109B2D /* Assets.xcassets */,
 				517DFBDD282867AB00109B2D /* Preview Content */,
@@ -275,13 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				517DFC072828687000109B2D /* PitScoutingView.swift in Sources */,
 				517DFC0E2828742700109B2D /* RobotPerformance.swift in Sources */,
-				517DFC082828687000109B2D /* HomeView.swift in Sources */,
-				517DFC0A2828687000109B2D /* ContentView.swift in Sources */,
-				517DFC062828687000109B2D /* MatchScoutingView.swift in Sources */,
-				517DFC092828687000109B2D /* ExportView.swift in Sources */,
 				517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */,
+				51ED879728505875006B4771 /* ContentView.swift in Sources */,
 				517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
