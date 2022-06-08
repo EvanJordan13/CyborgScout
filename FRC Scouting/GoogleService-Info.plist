@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>386162756934-6surt9dc3vcb1d9r1rekgn4on12ldl9f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.386162756934-6surt9dc3vcb1d9r1rekgn4on12ldl9f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA3vn-9i_VGkvTM362UHGCEk4zwVOc6Rkw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>386162756934</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Evan-Jordan.FRC-Scouting</string>
+	<key>PROJECT_ID</key>
+	<string>robot-scout-c6be2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>robot-scout-c6be2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:386162756934:ios:a8464a3afdf20457fd6947</string>
+</dict>
+</plist>
