@@ -8,8 +8,30 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("restarting")
-            .padding()
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            
+            PitScoutingView()
+                .tabItem{
+                    Label("Pit Scouting", systemImage: "note.text")
+                }
+            
+            MatchScoutingView()
+                .tabItem {
+                    Label("Match Scouting", systemImage: "flag.2.crossed")
+                }
+            DataView()
+                .tabItem {
+                    Label("Data", systemImage: "folder")
+                }
+            
+
+            
+            
+        }
     }
 }
 
