@@ -9,6 +9,12 @@ import SwiftUI
 
 struct MatchScoutingView: View {
     
+    private enum FieldToFocus: Int, CaseIterable {
+            case matchNumber, teamNumber, allianceMember1, allianceMember2
+        }
+    
+    @FocusState private var focusedField: FieldToFocus?
+    
     var startingPositions = ["Pilots Left Hub", "Pilots Left Edge", "Pilots Right Hub", "Pilots Right Edge"]
     @State var selectedAuto = "Pilots Left Hub"
     @State var matchNumber = ""
@@ -19,6 +25,8 @@ struct MatchScoutingView: View {
     @State var preloaded = false
     @State var taxied = false
     @State var autoLowGoal = 0
+    @State var teleopHighGoal = 0
+    @State var teleopLowGoal = 0
     
     var body: some View {
         
@@ -34,22 +42,20 @@ struct MatchScoutingView: View {
                     TextField("Match Number", text: $matchNumber)
                         .keyboardType(.numberPad)
                         .navigationTitle("Match Scouting")
+                        .focused($focusedField, equals: .matchNumber)
                     
                     TextField("Team Number ", text: $teamNumber)
                         .keyboardType(.numberPad)
+                        .focused($focusedField, equals: .teamNumber)
                     
                     TextField("Alliance Member 1", text: $allianceMember1)
                         .keyboardType(.numberPad)
+                        .focused($focusedField, equals: .allianceMember1)
                     
                     TextField("Alliance Member 2", text: $allianceMember2)
                         .keyboardType(.numberPad)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Button("Done") {
-                                    print("Clicked")
-                                }
-                            }
-                        }
+                        .focused($focusedField, equals: .allianceMember2)
+                        
                     
                     Picker("Auto Starting Position", selection: $selectedAuto) {
                         ForEach(startingPositions, id: \.self) {
@@ -67,9 +73,20 @@ struct MatchScoutingView: View {
                         
                         Stepper("Auto Low Goal Scored: \(autoLowGoal)", value: $autoLowGoal, in: 0...1000)
                         
+                        Stepper("Teleop High Goal Scored: \(teleopHighGoal)", value: $teleopHighGoal, in: 0...1000)
+                        
+                        Stepper("Teleop Low Goal Scored: \(teleopLowGoal)", value: $teleopLowGoal, in: 0...1000)
+                        
                        
                     }
                 }
+            .toolbar {
+                            ToolbarItem(placement: .keyboard) {
+                                Button("Done") {
+                                    focusedField = nil
+                                }
+                            }
+                        }
             }
             
         }
