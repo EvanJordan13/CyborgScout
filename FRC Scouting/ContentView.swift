@@ -7,7 +7,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel: AppViewModel
     var body: some View {
+        if viewModel.isSignedin {
+        
         TabView {
             HomeView()
                 .tabItem {
@@ -28,9 +31,9 @@ struct ContentView: View {
                     Label("Data", systemImage: "folder")
                 }
             
-
-            
-            
+        }
+        } else {
+            LoginView()
         }
     }
 }

@@ -62,6 +62,7 @@ struct MatchScoutingView: View {
                             Text($0)
                         }
                     }
+                    
                     Toggle("Preloaded With Cargo", isOn: $preloaded)
                 }
                     
