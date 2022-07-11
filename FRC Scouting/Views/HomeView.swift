@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject public  var viewModel: AppViewModel
+
     var body: some View {
-        Text("HomeView")
+        VStack {
+        Text("Home")
+        
+        Button(action: {
+            viewModel.signOut()
+           },
+               
+               label: {
+            Text("Sign Out")
+            
+                .frame(width: 200, height: 50)
+                .background(Color.blue)
+                .cornerRadius(8)
+                .foregroundColor(Color.white)
+        })
+
+    }
     }
 }
 
