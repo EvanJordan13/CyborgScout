@@ -15,12 +15,14 @@ struct PitScoutingView: View {
     
     @State var selectedItems = [String]()
     @State var allItems:[String] = [
-        "more items",
-        "another item",
-        "and more",
-        "still more",
-        "yet still more",
-        "and the final item"
+        "Pilots Left",
+        "Pilots Right",
+        "One Ball",
+        "Two Ball",
+        "Three Ball",
+        "Four Ball",
+        "Five Ball",
+        "Six Ball"
     ]
     
     @State var teamNumber = ""

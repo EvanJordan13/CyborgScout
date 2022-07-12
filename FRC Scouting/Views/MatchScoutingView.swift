@@ -10,8 +10,8 @@ import SwiftUI
 struct MatchScoutingView: View {
     
     private enum FieldToFocus: Int, CaseIterable {
-            case matchNumber, teamNumber, allianceMember1, allianceMember2
-        }
+        case matchNumber, teamNumber, allianceMember1, allianceMember2
+    }
     
     @FocusState private var focusedField: FieldToFocus?
     
@@ -35,36 +35,36 @@ struct MatchScoutingView: View {
             
             
             
-            Form {
-                
-                Section (header: Text("Pre-Match Scouting")) {
+                Form {
                     
-                    TextField("Match Number", text: $matchNumber)
-                        .keyboardType(.numberPad)
-                        .navigationTitle("Match Scouting")
-                        .focused($focusedField, equals: .matchNumber)
-                    
-                    TextField("Team Number ", text: $teamNumber)
-                        .keyboardType(.numberPad)
-                        .focused($focusedField, equals: .teamNumber)
-                    
-                    TextField("Alliance Member 1", text: $allianceMember1)
-                        .keyboardType(.numberPad)
-                        .focused($focusedField, equals: .allianceMember1)
-                    
-                    TextField("Alliance Member 2", text: $allianceMember2)
-                        .keyboardType(.numberPad)
-                        .focused($focusedField, equals: .allianceMember2)
+                    Section (header: Text("Pre-Match Scouting")) {
                         
-                    
-                    Picker("Auto Starting Position", selection: $selectedAuto) {
-                        ForEach(startingPositions, id: \.self) {
-                            Text($0)
+                        TextField("Match Number", text: $matchNumber)
+                            .keyboardType(.numberPad)
+                            .navigationTitle("Match Scouting")
+                            .focused($focusedField, equals: .matchNumber)
+                        
+                        TextField("Team Number ", text: $teamNumber)
+                            .keyboardType(.numberPad)
+                            .focused($focusedField, equals: .teamNumber)
+                        
+                        TextField("Alliance Member 1", text: $allianceMember1)
+                            .keyboardType(.numberPad)
+                            .focused($focusedField, equals: .allianceMember1)
+                        
+                        TextField("Alliance Member 2", text: $allianceMember2)
+                            .keyboardType(.numberPad)
+                            .focused($focusedField, equals: .allianceMember2)
+                        
+                        
+                        Picker("Auto Starting Position", selection: $selectedAuto) {
+                            ForEach(startingPositions, id: \.self) {
+                                Text($0)
+                            }
                         }
+                        
+                        Toggle("Preloaded With Cargo", isOn: $preloaded)
                     }
-                    
-                    Toggle("Preloaded With Cargo", isOn: $preloaded)
-                }
                     
                     Section (header: Text("Match-Time Scouting")) {
                         
@@ -78,20 +78,40 @@ struct MatchScoutingView: View {
                         
                         Stepper("Teleop Low Goal Scored: \(teleopLowGoal)", value: $teleopLowGoal, in: 0...1000)
                         
-                       
+                        
                     }
-                }
-            .toolbar {
-                            ToolbarItem(placement: .keyboard) {
-                                Button("Done") {
-                                    focusedField = nil
-                                }
-                            }
-                        }
-            }
+                    
+                    
+                    
+                    
+                    
+                    
+                    Button(action: {
+                        print("Hi")
+                    },
+                           
+                           label: {
+                        Text("Finish Scouting")
+                            
+                            .foregroundColor(Color.blue)
+                    })
+                }//End Form
+                
+           
             
+        }//End Navigation View
+        .navigationBarHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    focusedField = nil
+                }
+            }
         }
     }
+    
+}
+
 
 
 struct MatchScoutingView_Previews: PreviewProvider {
