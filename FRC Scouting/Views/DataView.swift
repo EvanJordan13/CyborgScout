@@ -17,7 +17,19 @@ struct DataView: View {
             
             List (model.list) { item in
                 Text(item.teamNumber)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            model.deleteData(robotToDelete: item)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+
+                    }
             }
+            .refreshable {
+                model.getData()
+            }
+            
             
         }
         
