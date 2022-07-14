@@ -92,7 +92,6 @@ struct MatchScoutingView: View {
                            
                            label: {
                         Text("Finish Scouting")
-                            
                             .foregroundColor(Color.blue)
                     })
                 }//End Form

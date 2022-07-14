@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct PitScoutingView: View {
+    
+    @ObservedObject var model = AppViewModel()
     private enum FieldToFocus: Int, CaseIterable {
         case matchNumber, teamNumber, allianceMember1, allianceMember2
     }
     @FocusState private var focusedField: FieldToFocus?
     
-    @State var selectedItems = [String]()
+    @State var selectedAutos = [String]()
     @State var allItems:[String] = [
         "Pilots Left",
         "Pilots Right",
@@ -34,6 +36,7 @@ struct PitScoutingView: View {
     @State var canAutoLowScore = false
     @State var canTeleopHighScore = false
     @State var canTeleopLowScore = false
+    @State var canTaxi = false
 
     
     var body: some View {
@@ -52,7 +55,7 @@ struct PitScoutingView: View {
                         }
                     }
                     
-                    Toggle("Can Taxi In Auto", isOn: $canAutoHighScore)
+                    Toggle("Can Taxi In Auto", isOn: $canTaxi)
                     
                     Toggle("Can Score High In Auto", isOn: $canAutoHighScore)
                     
@@ -64,7 +67,7 @@ struct PitScoutingView: View {
                     
                     //Multiple Selection for Auto Capabilites
                     NavigationLink(destination: {
-                        MultiSelectPickerView(allItems: allItems, selectedItems: $selectedItems)
+                        MultiSelectPickerView(allItems: allItems, selectedItems: $selectedAutos)
                         
                     }, label: {
                         HStack {
@@ -75,6 +78,16 @@ struct PitScoutingView: View {
                     
                 }
                 
+                Button(action: {
+                    model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos)
+                    
+                },
+                       
+                       label: {
+                    Text("Finish Scouting")
+                        
+                        .foregroundColor(Color.blue)
+                })
             }
             .navigationTitle("Pit Scouting")
             .toolbar {
