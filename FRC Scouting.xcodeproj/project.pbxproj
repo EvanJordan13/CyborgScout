@@ -18,6 +18,8 @@
 		5173411E2852868B003052FB /* PitScoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173411D2852868B003052FB /* PitScoutingView.swift */; };
 		517341202852869A003052FB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5173411F2852869A003052FB /* HomeView.swift */; };
 		51734122285286B8003052FB /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51734121285286B8003052FB /* DataView.swift */; };
+		5174430D287F344400425B71 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174430C287F344400425B71 /* AppViewModel.swift */; };
+		5174430F287F34F800425B71 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174430E287F34F800425B71 /* Robot.swift */; };
 		517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBD7282867A700109B2D /* FRC_ScoutingApp.swift */; };
 		517DFBDC282867AB00109B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517DFBDB282867AB00109B2D /* Assets.xcassets */; };
 		517DFBDF282867AB00109B2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517DFBDE282867AB00109B2D /* Preview Assets.xcassets */; };
@@ -53,6 +55,8 @@
 		5173411D2852868B003052FB /* PitScoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitScoutingView.swift; sourceTree = "<group>"; };
 		5173411F2852869A003052FB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		51734121285286B8003052FB /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		5174430C287F344400425B71 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		5174430E287F34F800425B71 /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		517DFBD4282867A700109B2D /* FRC Scouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FRC Scouting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517DFBD7282867A700109B2D /* FRC_ScoutingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingApp.swift; sourceTree = "<group>"; };
 		517DFBDB282867AB00109B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +117,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		5174430A287F332900425B71 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5174430C287F344400425B71 /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5174430B287F333C00425B71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5174430E287F34F800425B71 /* Robot.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		517DFBCB282867A700109B2D = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +156,8 @@
 		517DFBD6282867A700109B2D /* FRC Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				5174430B287F333C00425B71 /* Models */,
+				5174430A287F332900425B71 /* ViewModels */,
 				51734118285283C3003052FB /* Views */,
 				51ED879628505875006B4771 /* ContentView.swift */,
 				517DFC0D2828742700109B2D /* RobotPerformance.swift */,
@@ -316,6 +338,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5174430D287F344400425B71 /* AppViewModel.swift in Sources */,
+				5174430F287F34F800425B71 /* Robot.swift in Sources */,
 				51734122285286B8003052FB /* DataView.swift in Sources */,
 				517DFC0E2828742700109B2D /* RobotPerformance.swift in Sources */,
 				5173411A285283D8003052FB /* MatchScoutingView.swift in Sources */,

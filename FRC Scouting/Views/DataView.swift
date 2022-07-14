@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct DataView: View {
+    
+    @ObservedObject var model = AppViewModel()
+    
     var body: some View {
-        Text("Data View")
+        
+        VStack {
+            
+            List (model.list) { item in
+                Text(item.teamNumber)
+            }
+            
+        }
+        
+    }
+    
+    init() {
+        model.getData()
     }
 }
 
