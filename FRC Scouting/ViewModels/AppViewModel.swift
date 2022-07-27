@@ -13,7 +13,8 @@ class AppViewModel: ObservableObject {
     let db = Firestore.firestore()
     
     @Published var signedIn = false
-    @Published var list = [Robot]()
+    @Published var robots = [Robot]()
+    @Published var matches = [Match]()
     
     var isSignedin: Bool {
         return auth.currentUser != nil
@@ -52,12 +53,18 @@ class AppViewModel: ObservableObject {
         self.signedIn = false
     }
     
-    func getData() {
-        db.collection("Robots").getDocuments { snapshot, error in
+    
+    func getUID() -> String {
+        let uid =  auth.currentUser?.uid
+        return uid!
+    }
+    
+    func getRobots() {
+        db.collection("User Data").document("\(getUID())").collection("Robots").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
-                        self.list = snapshot.documents.map { d in
+                        self.robots = snapshot.documents.map { d in
                             return Robot(
                                 id: d.documentID,
                                 teamNumber: d["Team Number"] as? String ?? "",
@@ -78,15 +85,15 @@ class AppViewModel: ObservableObject {
     }
     
     
-    
-    func addRobot( teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
+    func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
         
         // Get a reference to the database
         let db = Firestore.firestore()
         
         
         // Add a document to a collection
-        db.collection("Robots").document("\(teamNumber)").setData([
+        //db.collection("Robots").document("\(teamNumber)").setData([
+        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").setData([
             "Team Number": teamNumber,
             "Drivetrain": drivetrain,
             "Can Auto High": canAutoHigh,
@@ -101,7 +108,7 @@ class AppViewModel: ObservableObject {
                     // No errors
                     
                     // Call get data to retrieve latest data
-                    self.getData()
+                    self.getRobots()
                 }
                 else {
                     // Handle the error
@@ -110,7 +117,7 @@ class AppViewModel: ObservableObject {
     }
     
     
-    func deleteData(robotToDelete: Robot) {
+    func deleteRobot(robotToDelete: Robot) {
         
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -126,7 +133,7 @@ class AppViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     
                     // Remove the todo that was just deleted
-                    self.list.removeAll { robot in
+                    self.robots.removeAll { robot in
                         
                         // Check for the todo to remove
                         return robot.id == robotToDelete.id
@@ -137,9 +144,108 @@ class AppViewModel: ObservableObject {
         
     }
     
+    func addMatch(
+    matchNumber: String,
+    teamNumber: String,
+    allianceMember1: String,
+    allianceMember2: String,
+    startingPosition: String,
+    preloaded: Bool,
+    taxied: Bool,
+    autoHighGoal: Int,
+    autoLowGoal: Int,
+    teleopHighGoal: Int,
+    teleopLowGoal: Int,
+    playedDefense: Bool) {
+        
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        
+        
+        // Add a document to a collection
+        //db.collection("Robots").document("\(teamNumber)").setData([
+        db.collection("User Data").document("\(getUID())").collection("Matches").document("\(matchNumber)").setData([
+            "Match Number": matchNumber,
+            "Team Number": teamNumber,
+            "Alliance Member 1": allianceMember1,
+            "Alliance Member 2": allianceMember2,
+            "Starting Position": startingPosition,
+            "Preloaded With Cargo": preloaded,
+            "Taxied": taxied,
+            "Auto High Scored": autoHighGoal,
+            "Auto Low Scored": autoLowGoal,
+            "Teloep High Scored": teleopHighGoal,
+            "Teleop Low Scored": teleopLowGoal,
+            "Played Defense": playedDefense]) { error in
+                
+                // Check for errors
+                if error == nil {
+                    // No errors
+                    
+                    // Call get data to retrieve latest data
+                    self.getMatches()
+                }
+                else {
+                    // Handle the error
+                }
+            }
+    }
     
     
+    func getMatches() {
+        db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
+            if error == nil {
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        self.matches = snapshot.documents.map { d in
+                            return Match(
+                                id: d.documentID,
+                                matchNumber: d["Match Number"] as? String ?? "",
+                                teamNumber: d["Team Number"] as? String ?? "",
+                                allianceMember1: d["Alliance Member 1"] as? String ?? "",
+                                allianceMember2: d["Alliance Member 2"] as? String ?? "",
+                                startingPosition: d["Starting Position"] as? String ?? "",
+                                preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
+                                taxied: d["Taxied"] as? Bool ?? false,
+                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
+                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
+                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
+                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
+                                playedDefense: d["Played Defense"] as? Bool ?? false)
+                        }
+                    }
+                }
+            } else {
+                print("LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+            }
+        }
+    }
     
-    
+    func deleteMatch(matchToDelete: Match) {
+        
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        
+        // Specify the document to delete
+        db.collection("User Data").document("\(getUID())").collection("Matches").document(matchToDelete.id).delete { error in
+            
+            // Check for errors
+            if error == nil {
+                // No errors
+                
+                // Update the UI from the main thread
+                DispatchQueue.main.async {
+                    
+                    // Remove the todo that was just deleted
+                    self.matches.removeAll { match in
+                        
+                        // Check for the todo to remove
+                        return match.id == matchToDelete.id
+                    }
+                }
+            }
+        }
+        
+    }
     
 }

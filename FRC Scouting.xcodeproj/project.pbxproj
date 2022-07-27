@@ -31,6 +31,8 @@
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
 		51ED879728505875006B4771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED879628505875006B4771 /* ContentView.swift */; };
 		51ED879B28505A3A006B4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51ED879A28505A3A006B4771 /* GoogleService-Info.plist */; };
+		51EE63622890EBED0010BEE2 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE63612890EBED0010BEE2 /* Match.swift */; };
+		51EE636428910F8C0010BEE2 /* MatchBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		51ED879628505875006B4771 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		51ED879A28505A3A006B4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		51EE63612890EBED0010BEE2 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchBreakdownView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 				5173411F2852869A003052FB /* HomeView.swift */,
 				51734121285286B8003052FB /* DataView.swift */,
 				518ED4C628792273003B06CD /* LoginView.swift */,
+				51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				5174430E287F34F800425B71 /* Robot.swift */,
+				51EE63612890EBED0010BEE2 /* Match.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +355,8 @@
 				517341202852869A003052FB /* HomeView.swift in Sources */,
 				51ED879728505875006B4771 /* ContentView.swift in Sources */,
 				517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */,
+				51EE63622890EBED0010BEE2 /* Match.swift in Sources */,
+				51EE636428910F8C0010BEE2 /* MatchBreakdownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

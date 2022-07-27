@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MatchScoutingView: View {
     
+    @ObservedObject var model = AppViewModel()
     private enum FieldToFocus: Int, CaseIterable {
         case matchNumber, teamNumber, allianceMember1, allianceMember2
     }
@@ -27,13 +28,11 @@ struct MatchScoutingView: View {
     @State var autoLowGoal = 0
     @State var teleopHighGoal = 0
     @State var teleopLowGoal = 0
+    @State var playedDefense = false
     
     var body: some View {
         
-        
         NavigationView {
-            
-            
             
                 Form {
                     
@@ -78,16 +77,13 @@ struct MatchScoutingView: View {
                         
                         Stepper("Teleop Low Goal Scored: \(teleopLowGoal)", value: $teleopLowGoal, in: 0...1000)
                         
+                        Toggle("Played Defense", isOn: $playedDefense)
                         
                     }
                     
                     
-                    
-                    
-                    
-                    
                     Button(action: {
-                        print("Hi")
+                        model.addMatch(matchNumber: matchNumber, teamNumber: teamNumber, allianceMember1: allianceMember1, allianceMember2: allianceMember2, startingPosition: selectedAuto, preloaded: preloaded, taxied: taxied, autoHighGoal: autoHighGoal, autoLowGoal: autoLowGoal, teleopHighGoal: teleopHighGoal, teleopLowGoal: teleopLowGoal, playedDefense: playedDefense)
                     },
                            
                            label: {
@@ -110,8 +106,6 @@ struct MatchScoutingView: View {
     }
     
 }
-
-
 
 struct MatchScoutingView_Previews: PreviewProvider {
     static var previews: some View {

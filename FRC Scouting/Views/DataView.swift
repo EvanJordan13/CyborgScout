@@ -12,31 +12,83 @@ struct DataView: View {
     @ObservedObject var model = AppViewModel()
     
     var body: some View {
+//        NavigationView{
+//
+//
+//
+//            //        List (model.matches) { item in
+//            //            Button {
+//            //
+//            //            } label: {
+//            //                Text("\(item.matchNumber)")
+//            //                    .foregroundColor(Color.blue)
+//            //
+//            //            }
+//            //
+//            //
+//            //        }
+//
+//
+//
+//
+//
+//            VStack {
+//
+//                List (model.robots) { item in
+//                    Text(item.teamNumber)
+//                        .swipeActions {
+//                            Button(role: .destructive) {
+//                                model.deleteRobot(robotToDelete: item)
+//                            } label: {
+//                                Label("Delete", systemImage: "trash")
+//                            }
+//
+//                        }
+//                }
+//                .refreshable {
+//                    model.getRobots()
+//                }
+//
+//                Spacer()
+//
+//                List (model.matches) { item in
+//                    Text(item.matchNumber)
+//                        .swipeActions {
+//                            Button(role: .destructive) {
+//                                model.deleteMatch(matchToDelete: item)
+//                            } label: {
+//                                Label("Delete", systemImage: "trash")
+//                            }
+//
+//                        }
+//                }
+//                //            .refreshable {
+//                //                model.getMatches()
+//                //            }
+//
+//
+//            }
+//        }
         
-        VStack {
-            
-            List (model.list) { item in
-                Text(item.teamNumber)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            model.deleteData(robotToDelete: item)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+        
+        
+        List {
+            ForEach(model.matches) { match in
+                NavigationLink(destination: MatchBreakdownView()) {
+                            
+                    Text("\(match.matchNumber)")
                         }
-
+                        
                     }
-            }
-            .refreshable {
-                model.getData()
-            }
+                }
+                .navigationTitle("Matches")
             
-            
-        }
         
     }
     
     init() {
-        model.getData()
+        model.getRobots()
+        model.getMatches()
     }
 }
 
