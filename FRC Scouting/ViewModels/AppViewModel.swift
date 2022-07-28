@@ -85,6 +85,15 @@ class AppViewModel: ObservableObject {
     }
     
     
+    func getNumRobots() -> Int {
+        let numRobotsScouted = self.robots.count
+        return numRobotsScouted
+    }
+    
+    
+    
+    
+    
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
         
         // Get a reference to the database
@@ -156,7 +165,8 @@ class AppViewModel: ObservableObject {
     autoLowGoal: Int,
     teleopHighGoal: Int,
     teleopLowGoal: Int,
-    playedDefense: Bool) {
+    playedDefense: Bool,
+    win: Bool) {
         
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -176,7 +186,8 @@ class AppViewModel: ObservableObject {
             "Auto Low Scored": autoLowGoal,
             "Teloep High Scored": teleopHighGoal,
             "Teleop Low Scored": teleopLowGoal,
-            "Played Defense": playedDefense]) { error in
+            "Played Defense": playedDefense,
+            "Won Match": win]) { error in
                 
                 // Check for errors
                 if error == nil {
@@ -211,7 +222,8 @@ class AppViewModel: ObservableObject {
                                 autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
                                 teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
                                 teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
-                                playedDefense: d["Played Defense"] as? Bool ?? false)
+                                playedDefense: d["Played Defense"] as? Bool ?? false, 
+                                win: d["Won Match"] as? Bool ?? false)
                         }
                     }
                 }

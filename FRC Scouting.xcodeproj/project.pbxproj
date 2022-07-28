@@ -33,6 +33,8 @@
 		51ED879B28505A3A006B4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51ED879A28505A3A006B4771 /* GoogleService-Info.plist */; };
 		51EE63622890EBED0010BEE2 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE63612890EBED0010BEE2 /* Match.swift */; };
 		51EE636428910F8C0010BEE2 /* MatchBreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */; };
+		51EE63662891FF8A0010BEE2 /* MatchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE63652891FF8A0010BEE2 /* MatchCardView.swift */; };
+		51EE636828925A320010BEE2 /* RobotCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE636728925A320010BEE2 /* RobotCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		51ED879A28505A3A006B4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51EE63612890EBED0010BEE2 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchBreakdownView.swift; sourceTree = "<group>"; };
+		51EE63652891FF8A0010BEE2 /* MatchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCardView.swift; sourceTree = "<group>"; };
+		51EE636728925A320010BEE2 /* RobotCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 				51734121285286B8003052FB /* DataView.swift */,
 				518ED4C628792273003B06CD /* LoginView.swift */,
 				51EE636328910F8C0010BEE2 /* MatchBreakdownView.swift */,
+				51EE63652891FF8A0010BEE2 /* MatchCardView.swift */,
+				51EE636728925A320010BEE2 /* RobotCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +352,8 @@
 			files = (
 				5174430D287F344400425B71 /* AppViewModel.swift in Sources */,
 				5174430F287F34F800425B71 /* Robot.swift in Sources */,
+				51EE63662891FF8A0010BEE2 /* MatchCardView.swift in Sources */,
+				51EE636828925A320010BEE2 /* RobotCardView.swift in Sources */,
 				51734122285286B8003052FB /* DataView.swift in Sources */,
 				517DFC0E2828742700109B2D /* RobotPerformance.swift in Sources */,
 				5173411A285283D8003052FB /* MatchScoutingView.swift in Sources */,

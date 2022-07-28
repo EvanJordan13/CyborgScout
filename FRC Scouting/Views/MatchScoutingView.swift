@@ -29,6 +29,7 @@ struct MatchScoutingView: View {
     @State var teleopHighGoal = 0
     @State var teleopLowGoal = 0
     @State var playedDefense = false
+    @State var win = false
     
     var body: some View {
         
@@ -79,11 +80,13 @@ struct MatchScoutingView: View {
                         
                         Toggle("Played Defense", isOn: $playedDefense)
                         
+                        Toggle("Won Match", isOn: $win)
+                        
                     }
                     
                     
                     Button(action: {
-                        model.addMatch(matchNumber: matchNumber, teamNumber: teamNumber, allianceMember1: allianceMember1, allianceMember2: allianceMember2, startingPosition: selectedAuto, preloaded: preloaded, taxied: taxied, autoHighGoal: autoHighGoal, autoLowGoal: autoLowGoal, teleopHighGoal: teleopHighGoal, teleopLowGoal: teleopLowGoal, playedDefense: playedDefense)
+                        model.addMatch(matchNumber: matchNumber, teamNumber: teamNumber, allianceMember1: allianceMember1, allianceMember2: allianceMember2, startingPosition: selectedAuto, preloaded: preloaded, taxied: taxied, autoHighGoal: autoHighGoal, autoLowGoal: autoLowGoal, teleopHighGoal: teleopHighGoal, teleopLowGoal: teleopLowGoal, playedDefense: playedDefense, win: win)
                     },
                            
                            label: {
