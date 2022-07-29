@@ -121,29 +121,32 @@ struct DataView: View {
         //
         //        }
         
-        
-        List {
-            Section(header: Text("Matches")){
-                ForEach(model.matches) { match in
-                    
-                    MatchCardView(match: match)
-                        .listRowBackground(match.win ? Color.blue : Color.red)
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                model.deleteMatch(matchToDelete: match)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                    
-                }
-            }
+        NavigationView {
             
-            Section(header: Text("Robots")){
-                ForEach(model.robots) { robot in
-                    
-                    RobotCardView(robot: robot)
-                        //.listRowBackground(match.win ? Color.blue : Color.red)
+            
+            List {
+                //            Section(header: Text("Matches")){
+                //                ForEach(model.matches) { match in
+                //
+                //                    MatchCardView(match: match)
+                //                        .listRowBackground(match.win ? Color.blue : Color.red)
+                //                        .swipeActions {
+                //                            Button(role: .destructive) {
+                //                                model.deleteMatch(matchToDelete: match)
+                //                            } label: {
+                //                                Label("Delete", systemImage: "trash")
+                //                            }
+                //                        }
+                //
+                //                }
+                //            }
+                
+                Section(header: Text("Robots")){
+                    ForEach(model.robots) { robot in
+                        NavigationLink(destination: RobotSpecsView(teamNumber: robot.teamNumber)) {
+                            RobotCardView(robot: robot)
+                                
+                        }
                         .swipeActions {
                             Button(role: .destructive) {
                                 model.deleteRobot(robotToDelete: robot)
@@ -151,16 +154,18 @@ struct DataView: View {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
-                    
+                        
+                    }
                 }
+                .navigationTitle("Data")
+                
+                
+                
+                
             }
-            
-            
-            
-            
-        }
-        .refreshable {
-            model.getMatches()
+            .refreshable {
+                model.getRobots()
+            }
         }
         
         
@@ -170,7 +175,6 @@ struct DataView: View {
     
     init() {
         model.getRobots()
-        model.getMatches()
     }
 }
 

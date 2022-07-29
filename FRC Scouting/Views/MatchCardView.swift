@@ -15,7 +15,6 @@ struct MatchCardView: View {
             VStack(alignment: .leading) {
                 Text("Match \(match.matchNumber)")
                     .font(.headline)
-                    .accessibilityAddTraits(.isHeader)
                 Spacer()
                 HStack {
                     Label("Team \(match.teamNumber)", systemImage: "person.3")

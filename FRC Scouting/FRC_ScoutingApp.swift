@@ -18,6 +18,7 @@ struct FRC_ScoutingApp: App {
             let viewModel = AppViewModel()
             ContentView()
                 .environmentObject(viewModel)
+            
                 
         }
     }
@@ -29,5 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         return true
     }
+    
+    
     
 }

@@ -132,7 +132,7 @@ class AppViewModel: ObservableObject {
         let db = Firestore.firestore()
         
         // Specify the document to delete
-        db.collection("Robots").document(robotToDelete.id).delete { error in
+        db.collection("User Data").document("\(getUID())").collection("Robots").document(robotToDelete.id).delete { error in
             
             // Check for errors
             if error == nil {
@@ -153,28 +153,16 @@ class AppViewModel: ObservableObject {
         
     }
     
-    func addMatch(
-    matchNumber: String,
-    teamNumber: String,
-    allianceMember1: String,
-    allianceMember2: String,
-    startingPosition: String,
-    preloaded: Bool,
-    taxied: Bool,
-    autoHighGoal: Int,
-    autoLowGoal: Int,
-    teleopHighGoal: Int,
-    teleopLowGoal: Int,
-    playedDefense: Bool,
-    win: Bool) {
+    func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int,                     teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool) {
         
         // Get a reference to the database
         let db = Firestore.firestore()
         
         
         // Add a document to a collection
-        //db.collection("Robots").document("\(teamNumber)").setData([
-        db.collection("User Data").document("\(getUID())").collection("Matches").document("\(matchNumber)").setData([
+        //db.collection("User Data").document("\(getUID())").collection("Matches").document("\(matchNumber)").setData([
+            
+        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
             "Match Number": matchNumber,
             "Team Number": teamNumber,
             "Alliance Member 1": allianceMember1,
@@ -191,10 +179,11 @@ class AppViewModel: ObservableObject {
                 
                 // Check for errors
                 if error == nil {
-                    // No errors
+                   
+                    //display succes message
+            
                     
-                    // Call get data to retrieve latest data
-                    self.getMatches()
+                    //self.getMatches()
                 }
                 else {
                     // Handle the error
@@ -203,8 +192,40 @@ class AppViewModel: ObservableObject {
     }
     
     
-    func getMatches() {
-        db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
+//    func getMatches() {
+//        db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
+//            if error == nil {
+//                if let snapshot = snapshot {
+//                    DispatchQueue.main.async {
+//                        self.matches = snapshot.documents.map { d in
+//                            return Match(
+//                                id: d.documentID,
+//                                matchNumber: d["Match Number"] as? String ?? "",
+//                                teamNumber: d["Team Number"] as? String ?? "",
+//                                allianceMember1: d["Alliance Member 1"] as? String ?? "",
+//                                allianceMember2: d["Alliance Member 2"] as? String ?? "",
+//                                startingPosition: d["Starting Position"] as? String ?? "",
+//                                preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
+//                                taxied: d["Taxied"] as? Bool ?? false,
+//                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
+//                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
+//                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
+//                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
+//                                playedDefense: d["Played Defense"] as? Bool ?? false,
+//                                win: d["Won Match"] as? Bool ?? false)
+//                        }
+//                    }
+//                }
+//            } else {
+//                //handle error
+//            }
+//        }
+//    }
+    
+    func getTeamMatches(teamNumber: String) -> [Match] {
+        let teamMatches = [Match]()
+        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
+        //db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
@@ -222,16 +243,25 @@ class AppViewModel: ObservableObject {
                                 autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
                                 teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
                                 teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
-                                playedDefense: d["Played Defense"] as? Bool ?? false, 
+                                playedDefense: d["Played Defense"] as? Bool ?? false,
                                 win: d["Won Match"] as? Bool ?? false)
                         }
-                    }
+                                        }
                 }
             } else {
-                print("LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+                //handle error
             }
         }
+        //return teamMatches
+        return self.matches
+
     }
+    
+    
+    
+    
+    
+    
     
     func deleteMatch(matchToDelete: Match) {
         
@@ -255,6 +285,8 @@ class AppViewModel: ObservableObject {
                         return match.id == matchToDelete.id
                     }
                 }
+            } else {
+                //handle error
             }
         }
         
