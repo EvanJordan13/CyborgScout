@@ -107,6 +107,15 @@
         "revision" : "e1499bc69b9040b29184f7f2996f7bab467c1639",
         "version" : "1.19.0"
       }
+    },
+    {
+      "identity" : "swiftuicharts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mecid/SwiftUICharts.git",
+      "state" : {
+        "revision" : "b08861bacf76d79d00185c973526f8d0ae114d5d",
+        "version" : "0.8.1"
+      }
     }
   ],
   "version" : 2

@@ -16,21 +16,26 @@ struct RobotSpecsView: View {
     var body: some View {
         let teamMatches = model.getTeamMatches(teamNumber: teamNumber)
         List {
-            Section(header: Text("Matches")){
+            Section(){
                 ForEach(teamMatches) { match in
-                    
-                    MatchCardView(match: match)
-                        .listRowBackground(match.win ? Color.blue : Color.red)
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                model.deleteMatch(matchToDelete: match)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
+                    NavigationLink(destination: MatchDetailView(match: match)) {
+                        
+                        MatchCardView(match: match)
+                            
+                            
+                        
+                    }
+                    .listRowBackground(match.win ? Color.blue : Color.red)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            model.deleteMatch(matchToDelete: match)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
                         }
-                    
+                    }
                 }
             }
+            .navigationTitle("Matches")
         }
         
     }

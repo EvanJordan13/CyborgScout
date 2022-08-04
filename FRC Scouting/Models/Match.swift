@@ -16,10 +16,10 @@ struct Match: Identifiable {
     var startingPosition: String
     var preloaded: Bool
     var taxied: Bool
-    var autoHighGoal: Int
-    var autoLowGoal: Int
-    var teleopHighGoal: Int
-    var teleopLowGoal: Int
+    var autoHighGoal: Double
+    var autoLowGoal: Double
+    var teleopHighGoal: Double
+    var teleopLowGoal: Double
     var playedDefense: Bool
     var win: Bool
 }

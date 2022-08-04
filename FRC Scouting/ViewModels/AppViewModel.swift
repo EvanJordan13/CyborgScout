@@ -172,7 +172,7 @@ class AppViewModel: ObservableObject {
             "Taxied": taxied,
             "Auto High Scored": autoHighGoal,
             "Auto Low Scored": autoLowGoal,
-            "Teloep High Scored": teleopHighGoal,
+            "Teleop High Scored": teleopHighGoal,
             "Teleop Low Scored": teleopLowGoal,
             "Played Defense": playedDefense,
             "Won Match": win]) { error in
@@ -192,40 +192,9 @@ class AppViewModel: ObservableObject {
     }
     
     
-//    func getMatches() {
-//        db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
-//            if error == nil {
-//                if let snapshot = snapshot {
-//                    DispatchQueue.main.async {
-//                        self.matches = snapshot.documents.map { d in
-//                            return Match(
-//                                id: d.documentID,
-//                                matchNumber: d["Match Number"] as? String ?? "",
-//                                teamNumber: d["Team Number"] as? String ?? "",
-//                                allianceMember1: d["Alliance Member 1"] as? String ?? "",
-//                                allianceMember2: d["Alliance Member 2"] as? String ?? "",
-//                                startingPosition: d["Starting Position"] as? String ?? "",
-//                                preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
-//                                taxied: d["Taxied"] as? Bool ?? false,
-//                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
-//                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
-//                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
-//                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
-//                                playedDefense: d["Played Defense"] as? Bool ?? false,
-//                                win: d["Won Match"] as? Bool ?? false)
-//                        }
-//                    }
-//                }
-//            } else {
-//                //handle error
-//            }
-//        }
-//    }
-    
     func getTeamMatches(teamNumber: String) -> [Match] {
         let teamMatches = [Match]()
         db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
-        //db.collection("User Data").document("\(getUID())").collection("Matches").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
@@ -239,10 +208,10 @@ class AppViewModel: ObservableObject {
                                 startingPosition: d["Starting Position"] as? String ?? "",
                                 preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
                                 taxied: d["Taxied"] as? Bool ?? false,
-                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
-                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
-                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
-                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
+                                autoHighGoal: d["Auto High Scored"] as? Double ?? 0,
+                                autoLowGoal: d["Auto Low Scored"] as? Double ?? 0,
+                                teleopHighGoal: d["Teleop High Scored"] as? Double ?? 0,
+                                teleopLowGoal: d["Teleop Low Scored"] as? Double ?? 0,
                                 playedDefense: d["Played Defense"] as? Bool ?? false,
                                 win: d["Won Match"] as? Bool ?? false)
                         }
