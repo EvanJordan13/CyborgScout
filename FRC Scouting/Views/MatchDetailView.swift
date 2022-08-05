@@ -18,7 +18,7 @@ struct MatchDetailView: View {
         let teleopHigh = Legend(color: .orange, label: "Teleoperated High Goal")
         let teleopLow = Legend(color: .pink, label: "Teleoperated Low Goal")
         
-        let points: [DataPoint] = [
+        let totalPoints: [DataPoint] = [
             .init(value: match.autoHighGoal, label: "\(Int(match.autoHighGoal))", legend: autoHigh),
             .init(value: match.autoLowGoal, label: "\(Int(match.autoLowGoal))", legend: autoLow),
             .init(value: match.teleopHighGoal, label: "\(Int(match.teleopHighGoal))", legend: teleopHigh),
@@ -28,21 +28,74 @@ struct MatchDetailView: View {
        
             
             List {
-                //Scoring Card
+                
+                //General Information Card
                 Section {
-                    BarChartView(dataPoints: points)
+                    VStack{
+                        HStack{
+                            Text("Match Number:")
+                            Spacer()
+                            Text("\(match.matchNumber)")
+                        }
                         .padding()
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Text("Team Number:")
+                            Spacer()
+                            Text("\(match.teamNumber)")
+                        }
+                        .padding()
+                        
+                        HStack{
+                            Text("Alliance Member 1:")
+                            Spacer()
+                            Text("\(match.allianceMember1)")
+                        }
+                        .padding()
+                        
+                        HStack{
+                            Text("Alliance Member 2:")
+                            Spacer()
+                            Text("\(match.allianceMember1)")
+                        }
+                        .padding()
+                        
+                        
+                    }
+                }
+                
+                
+                //Autonomous card
+                Section {
+                    VStack {
+                        HStack{
+                            Text("Robot Taxied: ")
+                            Spacer()
+                            if match.taxied {
+                                Image(systemName: "checkmark")
+                                    .opacity(1.0)
+                                    .foregroundColor(.blue)
+                            } else {
+                                Image(systemName: "xmark")
+                                    .opacity(1.0)
+                                    .foregroundColor(.blue)
+                            }
+
+                        }
+                    }
                 }
                 .navigationTitle("Match Details")
                 
+                //Scoring Card
                 Section {
-                    LineChartView(dataPoints: points)
+                    BarChartView(dataPoints: totalPoints)
                         .padding()
                 }
                 
                 Section {
-                    HorizontalBarChartView(dataPoints: points)
-                        .padding()
+                    
                 }
                 
                 
