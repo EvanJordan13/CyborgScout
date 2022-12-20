@@ -14,6 +14,8 @@ struct PitScoutingView: View {
         case matchNumber, teamNumber, allianceMember1, allianceMember2
     }
     @FocusState private var focusedField: FieldToFocus?
+    @State private var showingAddRobotSuccessAlert = false
+    @State private var showingAddRobotFailAlert = false
     
     @State var selectedAutos = [String]()
     @State var allItems:[String] = [
@@ -63,7 +65,7 @@ struct PitScoutingView: View {
                     
                     Toggle("Can Score High In Teleop", isOn: $canTeleopHighScore)
                     
-                    Toggle("Can Score High In Teleop", isOn: $canTeleopLowScore)
+                    Toggle("Can Score Low In Teleop", isOn: $canTeleopLowScore)
                     
                     //Multiple Selection for Auto Capabilites
                     NavigationLink(destination: {
@@ -79,15 +81,31 @@ struct PitScoutingView: View {
                 }
                 
                 Button(action: {
-                    model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos)
+                    if ((teamNumber.count > 0)) {
+                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos)
+                        if (model.matchAddFailed == false) {
+                            showingAddRobotSuccessAlert = true
+                        }
+                    } else {
+                        showingAddRobotFailAlert = true
+                    }
                     
                 },
+                    
+            
                        
                        label: {
                     Text("Finish Scouting")
                         
                         .foregroundColor(Color.blue)
                 })
+                .alert("Robot Successfully Added", isPresented: $showingAddRobotSuccessAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
+                .alert("Please Enter Valid Team Number", isPresented: $showingAddRobotFailAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
+                
             }
             .navigationTitle("Pit Scouting")
             .toolbar {

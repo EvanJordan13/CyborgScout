@@ -11,6 +11,8 @@ struct DataView: View {
     
     @ObservedObject var model = AppViewModel()
     
+    
+    
     var body: some View {
         
         NavigationView {

@@ -11,7 +11,9 @@ import Firebase
 class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     let db = Firestore.firestore()
+    var matchAddFailed = false
     
+   
     @Published var signedIn = false
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
@@ -19,6 +21,7 @@ class AppViewModel: ObservableObject {
     var isSignedin: Bool {
         return auth.currentUser != nil
     }
+    
     
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -37,11 +40,13 @@ class AppViewModel: ObservableObject {
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { [weak self]result, error in
             guard result != nil, error == nil else {
+                print ("it didnt work buddy")
                 return
             }
             
             DispatchQueue.main.async {
                 self?.signedIn = true
+                print("it worked kind of")
             }
             
         }
@@ -99,9 +104,7 @@ class AppViewModel: ObservableObject {
         // Get a reference to the database
         let db = Firestore.firestore()
         
-        
         // Add a document to a collection
-        //db.collection("Robots").document("\(teamNumber)").setData([
         db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").setData([
             "Team Number": teamNumber,
             "Drivetrain": drivetrain,
@@ -118,9 +121,12 @@ class AppViewModel: ObservableObject {
                     
                     // Call get data to retrieve latest data
                     self.getRobots()
+                    
+                    
                 }
                 else {
                     // Handle the error
+                    self.matchAddFailed = true
                 }
             }
     }
@@ -153,7 +159,7 @@ class AppViewModel: ObservableObject {
         
     }
     
-    func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int,                     teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool) {
+    func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int,                     teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool, finalScore: String) {
         
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -175,7 +181,8 @@ class AppViewModel: ObservableObject {
             "Teleop High Scored": teleopHighGoal,
             "Teleop Low Scored": teleopLowGoal,
             "Played Defense": playedDefense,
-            "Won Match": win]) { error in
+            "Won Match": win,
+            "finalScore": finalScore]) { error in
                 
                 // Check for errors
                 if error == nil {
@@ -213,7 +220,8 @@ class AppViewModel: ObservableObject {
                                 teleopHighGoal: d["Teleop High Scored"] as? Double ?? 0,
                                 teleopLowGoal: d["Teleop Low Scored"] as? Double ?? 0,
                                 playedDefense: d["Played Defense"] as? Bool ?? false,
-                                win: d["Won Match"] as? Bool ?? false)
+                                win: d["Won Match"] as? Bool ?? false,
+                                finalScore: d["Final Score"] as? String ?? "")
                         }
                                         }
                 }
@@ -238,7 +246,7 @@ class AppViewModel: ObservableObject {
         let db = Firestore.firestore()
         
         // Specify the document to delete
-        db.collection("User Data").document("\(getUID())").collection("Matches").document(matchToDelete.id).delete { error in
+        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(matchToDelete.teamNumber)").collection("Matches").document(matchToDelete.id).delete { error in
             
             // Check for errors
             if error == nil {
@@ -262,3 +270,4 @@ class AppViewModel: ObservableObject {
     }
     
 }
+   

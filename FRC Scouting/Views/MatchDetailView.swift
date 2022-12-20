@@ -12,6 +12,13 @@ struct MatchDetailView: View {
     @ObservedObject var model = AppViewModel()
     let match: Match
     
+    //multiplies balls scored by each balls point value and returns the sum
+    func getRobotScore () -> Double {
+        let autoPoints = (match.autoHighGoal * 4) + (match.autoLowGoal * 2)
+        let teleopPoints = (match.teleopHighGoal * 2) + (match.teleopLowGoal * 1)
+        return autoPoints + teleopPoints
+    }
+    
     var body: some View {
         let autoHigh = Legend(color: .blue, label: "Autonomous High Goal")
         let autoLow = Legend(color: .red, label: "Autonomous Low Goal")
@@ -62,6 +69,12 @@ struct MatchDetailView: View {
                         }
                         .padding()
                         
+                        HStack{
+                            Text("Individual Robot Score:")
+                            Spacer()
+                            Text("\(getRobotScore())")
+                        }
+                        .padding()
                         
                     }
                 }
@@ -92,11 +105,11 @@ struct MatchDetailView: View {
                 Section {
                     BarChartView(dataPoints: totalPoints)
                         .padding()
+                } header: {
+                    Text("Point Breakdown")
                 }
                 
-                Section {
-                    
-                }
+                
                 
                 
             }

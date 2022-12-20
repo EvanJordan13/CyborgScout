@@ -21,9 +21,7 @@ struct RobotSpecsView: View {
                     NavigationLink(destination: MatchDetailView(match: match)) {
                         
                         MatchCardView(match: match)
-                            
-                            
-                        
+ 
                     }
                     .listRowBackground(match.win ? Color.blue : Color.red)
                     .swipeActions {
@@ -36,6 +34,9 @@ struct RobotSpecsView: View {
                 }
             }
             .navigationTitle("Matches")
+        }
+        .refreshable {
+            model.getRobots()
         }
         
     }

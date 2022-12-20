@@ -22,4 +22,5 @@ struct Match: Identifiable {
     var teleopLowGoal: Double
     var playedDefense: Bool
     var win: Bool
+    var finalScore: String
 }
