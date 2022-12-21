@@ -18,6 +18,7 @@ struct FRC_ScoutingApp: App {
             let viewModel = AppViewModel()
             ContentView()
                 .environmentObject(viewModel)
+                .environmentObject(Router.shared)
             
                 
         }

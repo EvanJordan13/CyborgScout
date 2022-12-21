@@ -16,7 +16,7 @@ struct LoginView: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     private enum FieldToFocus: Int, CaseIterable {
-        case email, password
+        case email, password, username
     }
     @FocusState private var focusedField: FieldToFocus?
     
@@ -25,6 +25,8 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
+            
+            
             
             TextField("Email: ", text: $email)
                 .keyboardType(.default)
@@ -72,15 +74,22 @@ struct SignUpView: View {
         @EnvironmentObject  var viewModel: AppViewModel
         
         private enum FieldToFocus: Int, CaseIterable {
-            case email, password
+            case email, password, username
         }
         @FocusState private var focusedField: FieldToFocus?
         
+        @State private var username = ""
         @State private var email = ""
         @State private var password = ""
         
         var body: some View {
             VStack {
+                
+                
+                TextField("Username: ", text: $username)
+                    .keyboardType(.default)
+                    .focused($focusedField, equals: .email)
+                    .padding()
                 
                 TextField("Email: ", text: $email)
                     .keyboardType(.default)

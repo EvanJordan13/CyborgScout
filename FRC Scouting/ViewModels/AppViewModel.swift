@@ -40,13 +40,13 @@ class AppViewModel: ObservableObject {
     func signUp(email: String, password: String) {
         auth.createUser(withEmail: email, password: password) { [weak self]result, error in
             guard result != nil, error == nil else {
-                print ("it didnt work buddy")
+                print ("New user creation failed")
                 return
             }
             
             DispatchQueue.main.async {
                 self?.signedIn = true
-                print("it worked kind of")
+                print("New User successfully created")
             }
             
         }
@@ -65,6 +65,7 @@ class AppViewModel: ObservableObject {
     }
     
     func getRobots() {
+        
         db.collection("User Data").document("\(getUID())").collection("Robots").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
@@ -95,9 +96,10 @@ class AppViewModel: ObservableObject {
         return numRobotsScouted
     }
     
-    
-    
-    
+    func getNumMatches() -> Int {
+        let numMatchesScouted = self.matches.count
+        return numMatchesScouted
+    }
     
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
         

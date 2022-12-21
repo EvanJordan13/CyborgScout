@@ -16,7 +16,7 @@ struct PitScoutingView: View {
     @FocusState private var focusedField: FieldToFocus?
     @State private var showingAddRobotSuccessAlert = false
     @State private var showingAddRobotFailAlert = false
-    
+   
     @State var selectedAutos = [String]()
     @State var allItems:[String] = [
         "Pilots Left",

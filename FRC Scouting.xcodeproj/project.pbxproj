@@ -28,6 +28,7 @@
 		517DFBF5282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */; };
 		517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0B2828741200109B2D /* RobotSpecs.swift */; };
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
+		51C0D9132952BD9D00B2B559 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D9122952BD9D00B2B559 /* Router.swift */; };
 		51ED879728505875006B4771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED879628505875006B4771 /* ContentView.swift */; };
 		51ED879B28505A3A006B4771 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51ED879A28505A3A006B4771 /* GoogleService-Info.plist */; };
 		51EE63622890EBED0010BEE2 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EE63612890EBED0010BEE2 /* Match.swift */; };
@@ -73,6 +74,7 @@
 		517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		517DFC0B2828741200109B2D /* RobotSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotSpecs.swift; sourceTree = "<group>"; };
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		51C0D9122952BD9D00B2B559 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		51ED879628505875006B4771 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		51ED879A28505A3A006B4771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51EE63612890EBED0010BEE2 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		5174430B287F333C00425B71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				51C0D9122952BD9D00B2B559 /* Router.swift */,
 				5174430E287F34F800425B71 /* Robot.swift */,
 				51EE63612890EBED0010BEE2 /* Match.swift */,
 			);
@@ -362,6 +365,7 @@
 				5173411A285283D8003052FB /* MatchScoutingView.swift in Sources */,
 				518ED4C728792273003B06CD /* LoginView.swift in Sources */,
 				51EE636A289343720010BEE2 /* RobotSpecsView.swift in Sources */,
+				51C0D9132952BD9D00B2B559 /* Router.swift in Sources */,
 				5173411E2852868B003052FB /* PitScoutingView.swift in Sources */,
 				517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */,
 				51EE636E289A1ADB0010BEE2 /* MatchDetailView.swift in Sources */,

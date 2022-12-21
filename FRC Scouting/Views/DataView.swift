@@ -13,6 +13,7 @@ struct DataView: View {
     
     
     
+    
     var body: some View {
         
         NavigationView {
