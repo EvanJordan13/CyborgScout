@@ -53,6 +53,8 @@ struct LoginView: View {
                     .foregroundColor(Color.white)
             })
             
+            
+            
             NavigationLink("Create Account", destination: SignUpView())
                 .padding()
             
@@ -74,19 +76,26 @@ struct SignUpView: View {
         @EnvironmentObject  var viewModel: AppViewModel
         
         private enum FieldToFocus: Int, CaseIterable {
-            case email, password, username
+            case email, password, username, teamNumber
         }
         @FocusState private var focusedField: FieldToFocus?
         
         @State private var username = ""
         @State private var email = ""
         @State private var password = ""
+        @State private var teamNumber = ""
+
         
         var body: some View {
             VStack {
                 
                 
                 TextField("Username: ", text: $username)
+                    .keyboardType(.default)
+                    .focused($focusedField, equals: .email)
+                    .padding()
+                
+                TextField("Team Number: ", text: $teamNumber)
                     .keyboardType(.default)
                     .focused($focusedField, equals: .email)
                     .padding()
@@ -102,11 +111,15 @@ struct SignUpView: View {
                     .padding()
                 
                 Button(action: {
-                    guard !email.isEmpty, !password.isEmpty else {
+                    guard !email.isEmpty, !password.isEmpty, !username.isEmpty, !teamNumber.isEmpty else {
                         return
                     }
                     viewModel.signUp(email: email, password: password)
-                        },
+                    
+                   
+                    
+                    
+                       },
                        
                        label: {
                     Text("Create Account")
@@ -115,6 +128,24 @@ struct SignUpView: View {
                         .cornerRadius(8)
                         .foregroundColor(Color.white)
                 })
+                
+                
+                Button(action: {
+                    guard !username.isEmpty, !teamNumber.isEmpty else {
+                        return
+                    }
+                    viewModel.addUserInfo(username: username, teamNumber: teamNumber)
+                       },
+                       
+                       label: {
+                    Text("Update Info")
+                        .frame(width: 200, height: 50)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                        .foregroundColor(Color.white)
+                })
+                
+                
             }
             .navigationTitle("Create Account")
             .toolbar {

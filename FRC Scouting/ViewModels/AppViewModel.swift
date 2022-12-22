@@ -13,15 +13,53 @@ class AppViewModel: ObservableObject {
     let db = Firestore.firestore()
     var matchAddFailed = false
     
-   
     @Published var signedIn = false
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
+    
     
     var isSignedin: Bool {
         return auth.currentUser != nil
     }
     
+    func addUserInfo(username: String, teamNumber: String) {
+        let db = Firestore.firestore()
+        
+        db.collection("User Data").document("\(getUID())").collection("User Info").document("\(auth.currentUser?.email ?? "blank@gmail.com")").setData([
+            "Username": username,
+            "Team Number": teamNumber]) { error in
+                
+                // Check for errors
+                if error == nil {
+                    // No errors
+                    print("succesfully added user data")
+                }
+                else {
+                    //Handle Error
+                    print("failed to add user data")
+                }
+            }
+    }
+    
+//    func getUsername()->String {
+//
+//        let db = Firestore.firestore()
+//
+//        let docRef = db.collection("User Data").document("\(getUID())").collection("User Info").document("\(String(describing: auth.currentUser?.email))")
+//        docRef.getDocument{(document, error) in
+//            if let document = document, document.exists {
+//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                let output = ("Document data: \(dataDescription)")
+//                //Example output: Document data: ["password": test, "username": Test, "email": Test]
+//                print("Document data: \(dataDescription)")
+//                return output
+//
+//            }
+//            else {
+//                return "it didnt work"
+//            }
+//        }
+//    }
     
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -45,7 +83,7 @@ class AppViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                self?.signedIn = true
+                //self?.signedIn = true
                 print("New User successfully created")
             }
             
@@ -169,7 +207,7 @@ class AppViewModel: ObservableObject {
         
         // Add a document to a collection
         //db.collection("User Data").document("\(getUID())").collection("Matches").document("\(matchNumber)").setData([
-            
+        
         db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
             "Match Number": matchNumber,
             "Team Number": teamNumber,
@@ -188,9 +226,9 @@ class AppViewModel: ObservableObject {
                 
                 // Check for errors
                 if error == nil {
-                   
+                    
                     //display succes message
-            
+                    
                     
                     //self.getMatches()
                 }
@@ -225,7 +263,7 @@ class AppViewModel: ObservableObject {
                                 win: d["Won Match"] as? Bool ?? false,
                                 finalScore: d["Final Score"] as? String ?? "")
                         }
-                                        }
+                    }
                 }
             } else {
                 //handle error
@@ -233,7 +271,7 @@ class AppViewModel: ObservableObject {
         }
         //return teamMatches
         return self.matches
-
+        
     }
     
     
@@ -272,4 +310,4 @@ class AppViewModel: ObservableObject {
     }
     
 }
-   
+

@@ -88,6 +88,29 @@ struct HomeView: View {
                     
                 }
                 
+                Section {
+                    NavigationLink(destination: AccountView()) {
+                        
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("View Account")
+                                    .font(.headline)
+                                    .accessibilityAddTraits(.isHeader)
+                                Spacer()
+                                HStack {
+                                    Label("Logged In As: \(viewModel.getNumRobots())", systemImage: "person")
+                                }
+                                .font(.caption)
+                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
+                        }
+                    }
+                    
+                }
+                
                 
             }
         }
