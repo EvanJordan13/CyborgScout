@@ -8,37 +8,57 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: AppViewModel
-    @ObservedObject var model = AppViewModel()
     @EnvironmentObject var router: Router
    
     var body: some View {
         NavigationView {
-            if viewModel.signedIn {
-                        TabView (selection: $router.selectedTab) {
-                            HomeView()
-                                .tabItem {
-                                    Label("Home", systemImage: "house")
-                                }
-                                .tag(0)
-                
-                            PitScoutingView()
-                                .tabItem{
-                                    Label("Pit Scouting", systemImage: "note.text")
-                                }
-                                .tag(1)
-                
-                            MatchScoutingView()
-                                .tabItem {
-                                    Label("Match Scouting", systemImage: "flag.2.crossed")
-                                }
-                                .tag(2)
-                            DataView()
-                                .tabItem {
-                                    Label("Data", systemImage: "folder")
-                                }
-                                .tag(3)
-                
-                        }
+            if viewModel.signedIn{
+//                        TabView (selection: $router.selectedTab) {
+//                            HomeView()
+//                                .tabItem {
+//                                    Label("Home", systemImage: "house")
+//                                }
+//                                .tag(0)
+//
+//                            PitScoutingView()
+//                                .tabItem{
+//                                    Label("Pit Scouting", systemImage: "note.text")
+//                                }
+//                                .tag(1)
+//
+//                            MatchScoutingView()
+//                                .tabItem {
+//                                    Label("Match Scouting", systemImage: "flag.2.crossed")
+//                                }
+//                                .tag(2)
+//                            DataView()
+//                                .tabItem {
+//                                    Label("Data", systemImage: "folder")
+//                                }
+//                                .tag(3)
+//
+//                        }
+                TabView {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+
+                PitScoutingView()
+                    .tabItem{
+                        Label("Pit Scouting", systemImage: "note.text")
+                    }
+
+                MatchScoutingView()
+                    .tabItem {
+                        Label("Match Scouting", systemImage: "flag.2.crossed")
+                    }
+                DataView()
+                    .tabItem {
+                        Label("Data", systemImage: "folder")
+                    }
+
+            }
             } else {
                 LoginView()
             }

@@ -16,9 +16,11 @@ struct FRC_ScoutingApp: App {
     var body: some Scene {
         WindowGroup {
             let viewModel = AppViewModel()
+            
             ContentView()
                 .environmentObject(viewModel)
                 .environmentObject(Router.shared)
+                .environmentObject(User.shared)
             
                 
         }

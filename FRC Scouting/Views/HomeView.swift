@@ -9,18 +9,16 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject public  var viewModel: AppViewModel
-    
+    @EnvironmentObject var user: User
     
     var body: some View {
         
         NavigationView {
             
-            
             List {
                 
                 Section {
                     Button(action: { Router.shared.selectedTab = 1}) {
-                        
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -98,7 +96,7 @@ struct HomeView: View {
                                     .accessibilityAddTraits(.isHeader)
                                 Spacer()
                                 HStack {
-                                    Label("Logged In As: \(viewModel.getNumRobots())", systemImage: "person")
+                                    Label("Logged In As: \(user.username)", systemImage: "person")
                                 }
                                 .font(.caption)
                             }
@@ -114,6 +112,9 @@ struct HomeView: View {
                 
             }
         }
+    }
+    init() {
+        
     }
 }
 //struct HomeView_Previews: PreviewProvider {

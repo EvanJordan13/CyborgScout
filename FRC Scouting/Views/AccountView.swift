@@ -9,66 +9,57 @@ import SwiftUI
 
 struct AccountView: View {
     @ObservedObject var model = AppViewModel()
+    @EnvironmentObject var user: User
     var body: some View {
-        //viewModel.addUserInfo(username: username, teamNumber: teamNumber)
-        Button(action: {
-            model.signOut()
-        },
-               
-               label: {
-            Text("Sign Out")
-            
-                .frame(width: 200, height: 50)
-                .background(Color.blue)
-                .cornerRadius(8)
-                .foregroundColor(Color.white)
-        })
-        
-        
-        
-        
-        
-//                Section {
-//                    VStack{
-//                        HStack{
-//                            Text("Username: ")
-//                            Spacer()
-//                            Text("\()")
-//                        }
-//                        .padding()
-//
-//                        Spacer()
-//
-//                        HStack{
-//                            Text("Team Number:")
-//                            Spacer()
-//                            Text("\()")
-//                        }
-//                        .padding()
-//
-//                        HStack{
-//                            Text("Alliance Member 1:")
-//                            Spacer()
-//                            Text("\(match.allianceMember1)")
-//                        }
-//                        .padding()
-//
-//                        HStack{
-//                            Text("Alliance Member 2:")
-//                            Spacer()
-//                            Text("\(match.allianceMember1)")
-//                        }
-//                        .padding()
-//
-//                        HStack{
-//                            Text("Individual Robot Score:")
-//                            Spacer()
-//                            Text("\(getRobotScore())")
-//                        }
-//                        .padding()
-//
-//                    }
-//                }
+        NavigationView {
+            Section {
+                List{
+                    HStack{
+                        Text("Username: ")
+                        Spacer()
+                        Text("\(user.username)")
+                    }
+                    .padding()
+                    
+                    HStack{
+                        Text("Email Address: ")
+                        Spacer()
+                        Text("\(user.teamNumber)")
+                    }
+                    .padding()
+                    
+                    
+                    HStack{
+                        Text("Team Number:")
+                        Spacer()
+                        Text("\(user.teamNumber)")
+                    }
+                    .padding()
+                    
+                    //Spacer()
+                    
+                    NavigationLink(destination: EditAccountView()) {
+                        Text("Edit Account Information")
+                    }
+                    
+                    Button(action: {
+                        model.signOut()
+                        
+                    },
+                           
+                           label: {
+                        Text("Sign Out")
+                        
+                            .frame(width: 200, height: 50)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            .foregroundColor(Color.white)
+                    })
+                    
+                }
+            }
+            .navigationTitle("")
+        }
     }
     
     //struct AccountView_Previews: PreviewProvider {

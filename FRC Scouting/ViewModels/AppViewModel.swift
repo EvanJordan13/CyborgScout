@@ -22,44 +22,43 @@ class AppViewModel: ObservableObject {
         return auth.currentUser != nil
     }
     
+    
+//    func getUsername() -> String {
+//        let docRef = db.collection("User Data").document("\(getUID())").collection("User").document("User Info")
+//
+//        return
+//    }
+    
+
     func addUserInfo(username: String, teamNumber: String) {
-        let db = Firestore.firestore()
-        
-        db.collection("User Data").document("\(getUID())").collection("User Info").document("\(auth.currentUser?.email ?? "blank@gmail.com")").setData([
-            "Username": username,
-            "Team Number": teamNumber]) { error in
-                
-                // Check for errors
-                if error == nil {
-                    // No errors
-                    print("succesfully added user data")
-                }
-                else {
-                    //Handle Error
-                    print("failed to add user data")
-                }
+
+        let docRef = db.collection("User Data").document("\(getUID())").collection("User").document("User Info")
+
+        docRef.setData(["Username": username, "TeamNumber": teamNumber]) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("Document successfully written!")
             }
+        }
     }
     
-//    func getUsername()->String {
-//
-//        let db = Firestore.firestore()
-//
-//        let docRef = db.collection("User Data").document("\(getUID())").collection("User Info").document("\(String(describing: auth.currentUser?.email))")
-//        docRef.getDocument{(document, error) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                let output = ("Document data: \(dataDescription)")
-//                //Example output: Document data: ["password": test, "username": Test, "email": Test]
-//                print("Document data: \(dataDescription)")
-//                return output
-//
-//            }
-//            else {
-//                return "it didnt work"
-//            }
-//        }
-//    }
+    func UpdateUserInfo(id: String, username: String, teamNumber: String, email: String, password: String) {
+        let docRef = db.collection("User Data").document("\(id)").collection("User").document("User Info")
+
+        docRef.setData(["Username": username, "TeamNumber": teamNumber]) { error in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        auth.currentUser?.updateEmail(to: "\(email)")
+        
+        auth.currentUser?.updatePassword(to: "\(password)")
+    }
+    
     
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
@@ -83,7 +82,7 @@ class AppViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                //self?.signedIn = true
+                self?.signedIn = true
                 print("New User successfully created")
             }
             
@@ -98,8 +97,15 @@ class AppViewModel: ObservableObject {
     
     
     func getUID() -> String {
-        let uid =  auth.currentUser?.uid
-        return uid!
+        let uid = auth.currentUser?.uid
+        if (uid == nil) {
+            self.signedIn = false
+            print("No User Signed In!!")
+            return "1"
+        } else {
+            return uid!
+        }
+        
     }
     
     func getRobots() {
