@@ -14,7 +14,7 @@ import FirebaseAuth
 struct LoginView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserViewModel
     
     private enum FieldToFocus: Int, CaseIterable {
         case email, password, username
@@ -43,13 +43,9 @@ struct LoginView: View {
                 guard !email.isEmpty, !password.isEmpty else {
                     return
                 }
-                viewModel.signIn(email: email, password: password)
-//                user.username = self.username
-//                user.teamNumber = self.teamNumber
-//                user.email = self.email
-//                user.password = self.password
-//                user.id = viewModel.getUID()
-                    },
+                user.signIn(email: email, password: password)
+                
+            },
                    
                    label: {
                 Text("Login")
@@ -58,7 +54,6 @@ struct LoginView: View {
                     .cornerRadius(8)
                     .foregroundColor(Color.white)
             })
-            
             
             
             NavigationLink("Create Account", destination: SignUpView())

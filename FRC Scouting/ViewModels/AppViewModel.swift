@@ -12,105 +12,18 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var matchAddFailed = false
-    
-    @Published var signedIn = false
+
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
     
-    
-    var isSignedin: Bool {
-        return auth.currentUser != nil
-    }
-    
-    
-//    func getUsername() -> String {
-//        let docRef = db.collection("User Data").document("\(getUID())").collection("User").document("User Info")
-//
-//        return
-//    }
+
     
 
-    func addUserInfo(username: String, teamNumber: String) {
-
-        let docRef = db.collection("User Data").document("\(getUID())").collection("User").document("User Info")
-
-        docRef.setData(["Username": username, "TeamNumber": teamNumber]) { error in
-            if let error = error {
-                print("Error writing document: \(error)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
     
-    func UpdateUserInfo(id: String, username: String, teamNumber: String, email: String, password: String) {
-        let docRef = db.collection("User Data").document("\(id)").collection("User").document("User Info")
-
-        docRef.setData(["Username": username, "TeamNumber": teamNumber]) { error in
-            if let error = error {
-                print("Error writing document: \(error)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-        
-        auth.currentUser?.updateEmail(to: "\(email)")
-        
-        auth.currentUser?.updatePassword(to: "\(password)")
-    }
-    
-    
-    func signIn(email: String, password: String) {
-        auth.signIn(withEmail: email, password: password) { [weak self] result, error in
-            guard result != nil, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self?.signedIn = true
-            }
-            
-            
-        }
-    }
-    
-    func signUp(email: String, password: String) {
-        auth.createUser(withEmail: email, password: password) { [weak self]result, error in
-            guard result != nil, error == nil else {
-                print ("New user creation failed")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self?.signedIn = true
-                print("New User successfully created")
-            }
-            
-        }
-    }
-    
-    func signOut() {
-        try? auth.signOut()
-        
-        self.signedIn = false
-    }
-    
-    
-    func getUID() -> String {
-        let uid = auth.currentUser?.uid
-        if (uid == nil) {
-            self.signedIn = false
-            print("No User Signed In!!")
-            return "1"
-        } else {
-            return uid!
-        }
-        
-    }
     
     func getRobots() {
-        
-        db.collection("User Data").document("\(getUID())").collection("Robots").getDocuments { snapshot, error in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        db.collection("users").document("\(uid)").collection("Robots").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
@@ -129,7 +42,7 @@ class AppViewModel: ObservableObject {
                     }
                 }
             } else {
-                print("LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+                print("Fetching Robots Failed")
             }
         }
     }
@@ -146,12 +59,11 @@ class AppViewModel: ObservableObject {
     }
     
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
-        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
-        
         // Add a document to a collection
-        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").setData([
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").setData([
             "Team Number": teamNumber,
             "Drivetrain": drivetrain,
             "Can Auto High": canAutoHigh,
@@ -164,11 +76,8 @@ class AppViewModel: ObservableObject {
                 // Check for errors
                 if error == nil {
                     // No errors
-                    
                     // Call get data to retrieve latest data
                     self.getRobots()
-                    
-                    
                 }
                 else {
                     // Handle the error
@@ -177,44 +86,33 @@ class AppViewModel: ObservableObject {
             }
     }
     
-    
     func deleteRobot(robotToDelete: Robot) {
-        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
-        
         // Specify the document to delete
-        db.collection("User Data").document("\(getUID())").collection("Robots").document(robotToDelete.id).delete { error in
-            
+        db.collection("users").document("\(uid)").collection("Robots").document(robotToDelete.id).delete { error in
             // Check for errors
             if error == nil {
                 // No errors
-                
                 // Update the UI from the main thread
                 DispatchQueue.main.async {
-                    
                     // Remove the todo that was just deleted
                     self.robots.removeAll { robot in
-                        
                         // Check for the todo to remove
                         return robot.id == robotToDelete.id
                     }
                 }
             }
         }
-        
     }
     
-    func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int,                     teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool, finalScore: String) {
-        
+    func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int, teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool, finalScore: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
-        
-        
         // Add a document to a collection
-        //db.collection("User Data").document("\(getUID())").collection("Matches").document("\(matchNumber)").setData([
-        
-        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
             "Match Number": matchNumber,
             "Team Number": teamNumber,
             "Alliance Member 1": allianceMember1,
@@ -229,13 +127,9 @@ class AppViewModel: ObservableObject {
             "Played Defense": playedDefense,
             "Won Match": win,
             "finalScore": finalScore]) { error in
-                
                 // Check for errors
                 if error == nil {
-                    
                     //display succes message
-                    
-                    
                     //self.getMatches()
                 }
                 else {
@@ -244,10 +138,10 @@ class AppViewModel: ObservableObject {
             }
     }
     
-    
     func getTeamMatches(teamNumber: String) -> [Match] {
+        let uid = Auth.auth().currentUser!.uid
         let teamMatches = [Match]()
-        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
@@ -280,30 +174,19 @@ class AppViewModel: ObservableObject {
         
     }
     
-    
-    
-    
-    
-    
-    
     func deleteMatch(matchToDelete: Match) {
-        
+        let uid = Auth.auth().currentUser!.uid
         // Get a reference to the database
         let db = Firestore.firestore()
-        
         // Specify the document to delete
-        db.collection("User Data").document("\(getUID())").collection("Robots").document("\(matchToDelete.teamNumber)").collection("Matches").document(matchToDelete.id).delete { error in
-            
+        db.collection("users").document("\(uid)").collection("Robots").document("\(matchToDelete.teamNumber)").collection("Matches").document(matchToDelete.id).delete { error in
             // Check for errors
             if error == nil {
                 // No errors
-                
                 // Update the UI from the main thread
                 DispatchQueue.main.async {
-                    
                     // Remove the todo that was just deleted
                     self.matches.removeAll { match in
-                        
                         // Check for the todo to remove
                         return match.id == matchToDelete.id
                     }
@@ -312,8 +195,6 @@ class AppViewModel: ObservableObject {
                 //handle error
             }
         }
-        
     }
-    
 }
 

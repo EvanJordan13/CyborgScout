@@ -8,71 +8,46 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: AppViewModel
-    @EnvironmentObject var router: Router
-   
+    @EnvironmentObject var user: UserViewModel
+    @ObservedObject var model = AppViewModel()
     var body: some View {
         NavigationView {
-            if viewModel.signedIn{
-//                        TabView (selection: $router.selectedTab) {
-//                            HomeView()
-//                                .tabItem {
-//                                    Label("Home", systemImage: "house")
-//                                }
-//                                .tag(0)
-//
-//                            PitScoutingView()
-//                                .tabItem{
-//                                    Label("Pit Scouting", systemImage: "note.text")
-//                                }
-//                                .tag(1)
-//
-//                            MatchScoutingView()
-//                                .tabItem {
-//                                    Label("Match Scouting", systemImage: "flag.2.crossed")
-//                                }
-//                                .tag(2)
-//                            DataView()
-//                                .tabItem {
-//                                    Label("Data", systemImage: "folder")
-//                                }
-//                                .tag(3)
-//
-//                        }
-                TabView {
-                HomeView()
-                    .tabItem {
-                        Label("Home", systemImage: "house")
-                    }
-
-                PitScoutingView()
-                    .tabItem{
-                        Label("Pit Scouting", systemImage: "note.text")
-                    }
-
-                MatchScoutingView()
-                    .tabItem {
-                        Label("Match Scouting", systemImage: "flag.2.crossed")
-                    }
-                DataView()
-                    .tabItem {
-                        Label("Data", systemImage: "folder")
-                    }
-
-            }
+            if user.userIsAuthenticatedAndSynced || UserDefaults.standard.bool(forKey: "Logged In") {
+                        TabView {
+                            HomeView()
+                                .tabItem {
+                                    Label("Home", systemImage: "house")
+                                }
+                
+                            PitScoutingView()
+                                .tabItem{
+                                    Label("Pit Scouting", systemImage: "note.text")
+                                }
+                
+                            MatchScoutingView()
+                                .tabItem {
+                                    Label("Match Scouting", systemImage: "flag.2.crossed")
+                                }
+                            DataView()
+                                .tabItem {
+                                    Label("Data", systemImage: "folder")
+                                }
+                            
+                
+                        }
             } else {
                 LoginView()
             }
         }
         .onAppear {
-            viewModel.signedIn = viewModel.isSignedin
+            if UserDefaults.standard.string(forKey: "Current User email") != "" {
+                user.signIn(email: UserDefaults.standard.string(forKey: "Current User Email") ?? "error. Please log back in", password: UserDefaults.standard.string(forKey: "Current User Password") ?? "error. Please log back in")
+            } else {
+                return
+            }
         }
+        
        
     }
     
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}

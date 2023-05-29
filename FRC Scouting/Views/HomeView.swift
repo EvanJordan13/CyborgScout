@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject public  var viewModel: AppViewModel
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserViewModel
     
     var body: some View {
         
@@ -18,7 +18,7 @@ struct HomeView: View {
             List {
                 
                 Section {
-                    Button(action: { Router.shared.selectedTab = 1}) {
+                    Button(action: {}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -42,7 +42,7 @@ struct HomeView: View {
                 
                 
                 Section {
-                    Button(action: { Router.shared.selectedTab = 2}) {
+                    Button(action: {}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -64,7 +64,7 @@ struct HomeView: View {
                 }
                 
                 Section {
-                    Button(action: { Router.shared.selectedTab = 3}) {
+                    Button(action: {}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -86,9 +86,24 @@ struct HomeView: View {
                     
                 }
                 
+//                Button(action: {
+//                    user.signOut()
+//                    
+//                },
+//                       
+//                       label: {
+//                    Text("Sign Out")
+//                    
+//                        .frame(width: 200, height: 50)
+//                        .background(Color.blue)
+//                        .cornerRadius(8)
+//                        .foregroundColor(Color.white)
+//                })
+
+                
                 Section {
                     NavigationLink(destination: AccountView()) {
-                        
+
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("View Account")
@@ -96,7 +111,7 @@ struct HomeView: View {
                                     .accessibilityAddTraits(.isHeader)
                                 Spacer()
                                 HStack {
-                                    Label("Logged In As: \(user.username)", systemImage: "person")
+                                    Label("Logged In As: \(user.user?.username ?? "")", systemImage: "person")
                                 }
                                 .font(.caption)
                             }
@@ -106,7 +121,7 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
-                    
+
                 }
                 
                 

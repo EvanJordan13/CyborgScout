@@ -7,12 +7,9 @@
 
 import Foundation
 
-class User: Identifiable, ObservableObject {
-    static let shared = User()
-    @Published var id: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var username: String = ""
-    @Published var teamNumber: String = ""
-   
+struct User: Codable {
+    var username: String
+    var teamNumber: String
+    var email: String
 }
+

@@ -27,8 +27,8 @@
 		517DFBF3282867AC00109B2D /* FRC_ScoutingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF2282867AC00109B2D /* FRC_ScoutingUITests.swift */; };
 		517DFBF5282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */; };
 		517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0B2828741200109B2D /* RobotSpecs.swift */; };
+		518DFEEA2A23F59B009A463C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEE92A23F59B009A463C /* UserViewModel.swift */; };
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
-		51C0D9132952BD9D00B2B559 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D9122952BD9D00B2B559 /* Router.swift */; };
 		51C0D9152953C42500B2B559 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D9142953C42500B2B559 /* AccountView.swift */; };
 		51C0D91929550F9800B2B559 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D91829550F9800B2B559 /* SignUpView.swift */; };
 		51C0D91B2955137B00B2B559 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D91A2955137B00B2B559 /* User.swift */; };
@@ -77,8 +77,8 @@
 		517DFBF2282867AC00109B2D /* FRC_ScoutingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITests.swift; sourceTree = "<group>"; };
 		517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		517DFC0B2828741200109B2D /* RobotSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotSpecs.swift; sourceTree = "<group>"; };
+		518DFEE92A23F59B009A463C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		51C0D9122952BD9D00B2B559 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		51C0D9142953C42500B2B559 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		51C0D91829550F9800B2B559 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		51C0D91A2955137B00B2B559 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -148,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				5174430C287F344400425B71 /* AppViewModel.swift */,
+				518DFEE92A23F59B009A463C /* UserViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -155,7 +156,6 @@
 		5174430B287F333C00425B71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				51C0D9122952BD9D00B2B559 /* Router.swift */,
 				5174430E287F34F800425B71 /* Robot.swift */,
 				51EE63612890EBED0010BEE2 /* Match.swift */,
 				51C0D91A2955137B00B2B559 /* User.swift */,
@@ -378,11 +378,11 @@
 				5173411A285283D8003052FB /* MatchScoutingView.swift in Sources */,
 				518ED4C728792273003B06CD /* LoginView.swift in Sources */,
 				51EE636A289343720010BEE2 /* RobotSpecsView.swift in Sources */,
-				51C0D9132952BD9D00B2B559 /* Router.swift in Sources */,
 				5173411E2852868B003052FB /* PitScoutingView.swift in Sources */,
 				517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */,
 				51EE636E289A1ADB0010BEE2 /* MatchDetailView.swift in Sources */,
 				517341202852869A003052FB /* HomeView.swift in Sources */,
+				518DFEEA2A23F59B009A463C /* UserViewModel.swift in Sources */,
 				51C0D91D295519EC00B2B559 /* EditAccountView.swift in Sources */,
 				51ED879728505875006B4771 /* ContentView.swift in Sources */,
 				517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */,

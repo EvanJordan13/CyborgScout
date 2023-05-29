@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct AccountView: View {
-    @ObservedObject var model = AppViewModel()
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserViewModel
     var body: some View {
         NavigationView {
             Section {
-                List{
+                VStack{
                     HStack{
                         Text("Username: ")
                         Spacer()
-                        Text("\(user.username)")
+                        Text("\(user.user?.username ?? "")")
                     }
                     .padding()
                     
                     HStack{
                         Text("Email Address: ")
                         Spacer()
-                        Text("\(user.teamNumber)")
+                        Text("\(user.user?.email ?? "")")
                     }
                     .padding()
                     
@@ -32,18 +31,13 @@ struct AccountView: View {
                     HStack{
                         Text("Team Number:")
                         Spacer()
-                        Text("\(user.teamNumber)")
+                        Text("\(user.user?.teamNumber ?? "")")
                     }
                     .padding()
                     
-                    //Spacer()
-                    
-                    NavigationLink(destination: EditAccountView()) {
-                        Text("Edit Account Information")
-                    }
-                    
                     Button(action: {
-                        model.signOut()
+                        user.signOut()
+                        UserDefaults.standard.set(user.userIsAuthenticatedAndSynced, forKey: "Logged In")
                         
                     },
                            
@@ -56,7 +50,14 @@ struct AccountView: View {
                             .foregroundColor(Color.white)
                     })
                     
+                    //Spacer()
+                    
+                    NavigationLink(destination: EditAccountView()) {
+                        Text("Edit Account Information")
+                    }
+                    
                 }
+                
             }
             .navigationTitle("")
         }
