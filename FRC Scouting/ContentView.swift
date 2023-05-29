@@ -10,31 +10,36 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @EnvironmentObject var user: UserViewModel
     @ObservedObject var model = AppViewModel()
+    @State var tabSelection = 1
     var body: some View {
         NavigationView {
             if user.userIsAuthenticatedAndSynced || UserDefaults.standard.bool(forKey: "Logged In") {
-                        TabView {
-                            HomeView()
-                                .tabItem {
-                                    Label("Home", systemImage: "house")
-                                }
-                
-                            PitScoutingView()
-                                .tabItem{
-                                    Label("Pit Scouting", systemImage: "note.text")
-                                }
-                
-                            MatchScoutingView()
-                                .tabItem {
-                                    Label("Match Scouting", systemImage: "flag.2.crossed")
-                                }
-                            DataView()
-                                .tabItem {
-                                    Label("Data", systemImage: "folder")
-                                }
-                            
-                
+                TabView(selection: $tabSelection) {
+                    HomeView(tabSelection: $tabSelection)
+                        .tabItem {
+                            Label("Home", systemImage: "house")
                         }
+                        .tag(0)
+                    
+                    PitScoutingView()
+                        .tabItem{
+                            Label("Pit Scouting", systemImage: "note.text")
+                        }
+                        .tag(1)
+                    
+                    MatchScoutingView()
+                        .tabItem {
+                            Label("Match Scouting", systemImage: "flag.2.crossed")
+                        }
+                        .tag(2)
+                    DataView()
+                        .tabItem {
+                            Label("Data", systemImage: "folder")
+                        }
+                        .tag(3)
+                    
+                    
+                }
             } else {
                 LoginView()
             }
@@ -47,7 +52,7 @@ struct ContentView: View {
             }
         }
         
-       
+        
     }
     
 }

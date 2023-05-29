@@ -12,7 +12,7 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             Section {
-                VStack{
+                List{
                     HStack{
                         Text("Username: ")
                         Spacer()
@@ -35,28 +35,28 @@ struct AccountView: View {
                     }
                     .padding()
                     
-                    Button(action: {
-                        user.signOut()
-                        UserDefaults.standard.set(user.userIsAuthenticatedAndSynced, forKey: "Logged In")
-                        
-                    },
-                           
-                           label: {
-                        Text("Sign Out")
-                        
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                            .cornerRadius(8)
-                            .foregroundColor(Color.white)
-                    })
                     
-                    //Spacer()
-                    
-                    NavigationLink(destination: EditAccountView()) {
-                        Text("Edit Account Information")
+                    HStack{
+                        
+                        
+                        Button(action: {
+                            user.signOut()
+                            UserDefaults.standard.set(user.userIsAuthenticatedAndSynced, forKey: "Logged In")
+                            
+                        },
+                               
+                               label: {
+                            Text("Sign Out")
+                            
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                //.background(Color.red)
+                                .cornerRadius(8)
+                                .foregroundColor(Color.red)
+                        })
                     }
                     
                 }
+                
                 
             }
             .navigationTitle("")

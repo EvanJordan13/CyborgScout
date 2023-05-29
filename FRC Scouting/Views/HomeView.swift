@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject public  var viewModel: AppViewModel
     @EnvironmentObject var user: UserViewModel
+    @Binding var tabSelection: Int
     
     var body: some View {
         
@@ -17,8 +18,9 @@ struct HomeView: View {
             
             List {
                 
+                
                 Section {
-                    Button(action: {}) {
+                    Button(action: { self.tabSelection = 1}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -42,7 +44,7 @@ struct HomeView: View {
                 
                 
                 Section {
-                    Button(action: {}) {
+                    Button(action: { self.tabSelection = 2}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -64,7 +66,7 @@ struct HomeView: View {
                 }
                 
                 Section {
-                    Button(action: {}) {
+                    Button(action: { self.tabSelection = 3}) {
                         
                         HStack {
                             VStack(alignment: .leading) {
@@ -86,24 +88,14 @@ struct HomeView: View {
                     
                 }
                 
-//                Button(action: {
-//                    user.signOut()
-//                    
-//                },
-//                       
-//                       label: {
-//                    Text("Sign Out")
-//                    
-//                        .frame(width: 200, height: 50)
-//                        .background(Color.blue)
-//                        .cornerRadius(8)
-//                        .foregroundColor(Color.white)
-//                })
-
                 
                 Section {
-                    NavigationLink(destination: AccountView()) {
-
+                    
+                    ZStack{
+                        NavigationLink(destination: AccountView()) {
+                        }
+                        .opacity(0.0)
+                        .buttonStyle(PlainButtonStyle())
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("View Account")
@@ -121,20 +113,9 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
-
                 }
-                
-                
             }
         }
     }
-    init() {
-        
-    }
 }
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
 
