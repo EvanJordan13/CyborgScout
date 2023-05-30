@@ -57,7 +57,7 @@ class AppViewModel: ObservableObject {
         return self.robots.count
     }
     
-    func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
+    func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String], scores: [Int]) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -70,7 +70,8 @@ class AppViewModel: ObservableObject {
             "Can Teleop High": canTeleopHigh,
             "Can Teleop Low": canTeleopLow,
             "Can Taxi": canTaxi,
-            "Autos": autos]) { error in
+            "Autos": autos,
+            "Scores": scores]) { error in
                 
                 // Check for errors
                 if error == nil {
@@ -139,6 +140,22 @@ class AppViewModel: ObservableObject {
                     // Handle the error
                 }
             }
+        
+        
+//        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").setData([
+//            "Match Scores": matchNumber,
+//            ]) { error in
+//                // Check for errors
+//                if error == nil {
+//                    //display succes message
+//                    //self.getMatches()
+//                }
+//                else {
+//                    // Handle the error
+//                }
+//            }
+        
+        
     }
     
     func getTeamMatches(teamNumber: String) -> [Match] {
@@ -158,10 +175,10 @@ class AppViewModel: ObservableObject {
                                 startingPosition: d["Starting Position"] as? String ?? "",
                                 preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
                                 taxied: d["Taxied"] as? Bool ?? false,
-                                autoHighGoal: d["Auto High Scored"] as? Double ?? 0,
-                                autoLowGoal: d["Auto Low Scored"] as? Double ?? 0,
-                                teleopHighGoal: d["Teleop High Scored"] as? Double ?? 0,
-                                teleopLowGoal: d["Teleop Low Scored"] as? Double ?? 0,
+                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
+                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
+                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
+                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
                                 playedDefense: d["Played Defense"] as? Bool ?? false,
                                 win: d["Won Match"] as? Bool ?? false,
                                 finalScore: d["Final Score"] as? String ?? "")
@@ -199,6 +216,45 @@ class AppViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    func assignAverageScores() {
+        
+    }
+    
+    
+//    func getAverageMatchScore {
+//        let uid = Auth.auth().currentUser!.uid
+//        let teamMatches = [Match]()
+//        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
+//            if error == nil {
+//                if let snapshot = snapshot {
+//                    DispatchQueue.main.async {
+//                        self.matches = snapshot.documents.map { d in
+//                            return Match(
+//                                id: d.documentID,
+//                                matchNumber: d["Match Number"] as? String ?? "",
+//                                teamNumber: d["Team Number"] as? String ?? "",
+//                                allianceMember1: d["Alliance Member 1"] as? String ?? "",
+//                                allianceMember2: d["Alliance Member 2"] as? String ?? "",
+//                                startingPosition: d["Starting Position"] as? String ?? "",
+//                                preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
+//                                taxied: d["Taxied"] as? Bool ?? false,
+//                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
+//                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
+//                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
+//                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
+//                                playedDefense: d["Played Defense"] as? Bool ?? false,
+//                                win: d["Won Match"] as? Bool ?? false,
+//                                finalScore: d["Final Score"] as? String ?? "")
+//                        }
+//                    }
+//                }
+//            } else {
+//                //handle error
+//            }
+//        }
+//    }
 }
 
 

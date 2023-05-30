@@ -39,6 +39,7 @@ struct PitScoutingView: View {
     @State var canTeleopHighScore = false
     @State var canTeleopLowScore = false
     @State var canTaxi = false
+    var scores = [Int]()
 
     
     var body: some View {
@@ -82,7 +83,7 @@ struct PitScoutingView: View {
                 
                 Button(action: {
                     if ((teamNumber.count > 0)) {
-                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos)
+                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos, scores: scores)
                         if (model.matchAddFailed == false) {
                             showingAddRobotSuccessAlert = true
                         }

@@ -28,6 +28,8 @@
 		517DFBF5282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */; };
 		517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0B2828741200109B2D /* RobotSpecs.swift */; };
 		518DFEEA2A23F59B009A463C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEE92A23F59B009A463C /* UserViewModel.swift */; };
+		518DFEEC2A258413009A463C /* RobotRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEEB2A258413009A463C /* RobotRankingView.swift */; };
+		518DFEEE2A258491009A463C /* RobotRankCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEED2A258491009A463C /* RobotRankCard.swift */; };
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
 		51C0D9152953C42500B2B559 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D9142953C42500B2B559 /* AccountView.swift */; };
 		51C0D91929550F9800B2B559 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D91829550F9800B2B559 /* SignUpView.swift */; };
@@ -77,6 +79,8 @@
 		517DFBF4282867AC00109B2D /* FRC_ScoutingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		517DFC0B2828741200109B2D /* RobotSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotSpecs.swift; sourceTree = "<group>"; };
 		518DFEE92A23F59B009A463C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		518DFEEB2A258413009A463C /* RobotRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotRankingView.swift; sourceTree = "<group>"; };
+		518DFEED2A258491009A463C /* RobotRankCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotRankCard.swift; sourceTree = "<group>"; };
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		51C0D9142953C42500B2B559 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		51C0D91829550F9800B2B559 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				51EE636D289A1ADB0010BEE2 /* MatchDetailView.swift */,
 				51C0D9142953C42500B2B559 /* AccountView.swift */,
 				51C0D91829550F9800B2B559 /* SignUpView.swift */,
+				518DFEEB2A258413009A463C /* RobotRankingView.swift */,
+				518DFEED2A258491009A463C /* RobotRankCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,12 +376,14 @@
 				5174430F287F34F800425B71 /* Robot.swift in Sources */,
 				51EE63662891FF8A0010BEE2 /* MatchCardView.swift in Sources */,
 				51C0D9152953C42500B2B559 /* AccountView.swift in Sources */,
+				518DFEEC2A258413009A463C /* RobotRankingView.swift in Sources */,
 				51EE636828925A320010BEE2 /* RobotCardView.swift in Sources */,
 				51734122285286B8003052FB /* DataView.swift in Sources */,
 				5173411A285283D8003052FB /* MatchScoutingView.swift in Sources */,
 				518ED4C728792273003B06CD /* LoginView.swift in Sources */,
 				51EE636A289343720010BEE2 /* RobotSpecsView.swift in Sources */,
 				5173411E2852868B003052FB /* PitScoutingView.swift in Sources */,
+				518DFEEE2A258491009A463C /* RobotRankCard.swift in Sources */,
 				517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */,
 				51EE636E289A1ADB0010BEE2 /* MatchDetailView.swift in Sources */,
 				517341202852869A003052FB /* HomeView.swift in Sources */,

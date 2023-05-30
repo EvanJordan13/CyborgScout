@@ -60,11 +60,6 @@ struct MatchScoutingView: View {
                         .focused($focusedField, equals: .allianceMember2)
                     
                     
-                    Picker("Auto Starting Position", selection: $selectedAuto) {
-                        ForEach(startingPositions, id: \.self) {
-                            Text($0)
-                        }
-                    }
                     
                     Toggle("Preloaded With Cargo", isOn: $preloaded)
                 }
@@ -87,6 +82,8 @@ struct MatchScoutingView: View {
                 
                 Section (header: Text("Post-Match Scouting")) {
                     Toggle("Played Defense", isOn: $playedDefense)
+                    
+
                     
                     Toggle("Won Match", isOn: $win)
                     
