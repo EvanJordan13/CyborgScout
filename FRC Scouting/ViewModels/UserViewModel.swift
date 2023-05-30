@@ -14,12 +14,12 @@ import FirebaseFirestoreSwift
 import Firebase
 
 class UserViewModel: ObservableObject {
-    // MARK: State
+
     @Published var user: User?
     
-    // MARK: Properties
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
+    
     var uuid: String? {
         auth.currentUser?.uid
     }
@@ -71,7 +71,7 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    private func sync() {
+     func sync() {
         guard userIsAuthenticated else {
             return
         }
@@ -85,9 +85,7 @@ class UserViewModel: ObservableObject {
             } catch {
                 print("Sync error: \(error)")
             }
-            
         }
-        
     }
     
     
@@ -111,7 +109,5 @@ class UserViewModel: ObservableObject {
         } catch {
             print("Error updating: \(error)")
         }
-        
-        
     }
 }

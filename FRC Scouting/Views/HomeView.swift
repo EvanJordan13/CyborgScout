@@ -21,23 +21,20 @@ struct HomeView: View {
                 
                 Section {
                     Button(action: { self.tabSelection = 1}) {
-                        
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text("Scout A New Robot")
-                                    .font(.headline)
-                                    .accessibilityAddTraits(.isHeader)
-                                Spacer()
-                                HStack {
-                                    Label("Teams Scouted: \(viewModel.getNumRobots())", systemImage: "note.text")
+                                HStack{
+                                    Label("", systemImage: "note.text")
+                                    Text("Scout A New Robot")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                    .font(.caption)
                                 }
-                                .font(.caption)
-                            }
-                            .navigationTitle("Cyborg Scout")
-                            .padding()
-                            .foregroundColor(.primary)
-                            Spacer()
-                            Label("", systemImage: "chevron.right")
+                                .navigationTitle("Cyborg Scout")
+                                .padding()
+                                .foregroundColor(.primary)
+                                Spacer()
+                                Label("", systemImage: "chevron.right")
+                            
                         }
                     }
                 }
@@ -45,17 +42,13 @@ struct HomeView: View {
                 
                 Section {
                     Button(action: { self.tabSelection = 2}) {
-                        
                         HStack {
-                            VStack(alignment: .leading) {
+                            HStack {
+                                Label("", systemImage: "flag.2.crossed")
                                 Text("Scout A New Match")
                                     .font(.headline)
                                     .accessibilityAddTraits(.isHeader)
-                                Spacer()
-                                HStack {
-                                    Label("Matches Scouted: \(viewModel.getNumMatches())", systemImage: "flag.2.crossed")
-                                }
-                                .font(.caption)
+                                
                             }
                             .padding()
                             .foregroundColor(.primary)
@@ -63,21 +56,18 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
-                }
+                    }
+                
                 
                 Section {
                     Button(action: { self.tabSelection = 3}) {
-                        
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("View Scouted Robots And Matches")
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "folder")
+                                Text("View Scouted Robots")
                                     .font(.headline)
                                     .accessibilityAddTraits(.isHeader)
-                                Spacer()
-                                HStack {
-                                    Label("Teams Scouted: \(viewModel.getNumRobots())", systemImage: "folder")
-                                }
-                                .font(.caption)
+                                
                             }
                             .padding()
                             .foregroundColor(.primary)
@@ -85,8 +75,9 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
+                    }
                     
-                }
+                
                 
                 
                 Section {
@@ -96,16 +87,16 @@ struct HomeView: View {
                         }
                         .opacity(0.0)
                         .buttonStyle(PlainButtonStyle())
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("View Account")
-                                    .font(.headline)
-                                    .accessibilityAddTraits(.isHeader)
-                                Spacer()
-                                HStack {
-                                    Label("Logged In As: \(user.user?.username ?? "")", systemImage: "person")
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "person")
+                                VStack{
+                                    Text("View Account")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                    Text("Logged In As: \(user.user?.username ?? "")")
+                                        .font(.caption)
                                 }
-                                .font(.caption)
                             }
                             .padding()
                             .foregroundColor(.primary)
@@ -114,8 +105,14 @@ struct HomeView: View {
                         }
                     }
                 }
+                
             }
         }
+        
+        .onAppear {
+            //user.sync()
+        }
+        
     }
 }
 

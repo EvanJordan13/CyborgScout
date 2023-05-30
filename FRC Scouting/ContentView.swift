@@ -10,7 +10,7 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @EnvironmentObject var user: UserViewModel
     @ObservedObject var model = AppViewModel()
-    @State var tabSelection = 1
+    @State var tabSelection = 0
     var body: some View {
         NavigationView {
             if user.userIsAuthenticatedAndSynced || UserDefaults.standard.bool(forKey: "Logged In") {

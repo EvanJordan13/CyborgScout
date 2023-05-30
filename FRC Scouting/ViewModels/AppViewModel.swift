@@ -9,16 +9,18 @@ import Foundation
 import Firebase
 
 class AppViewModel: ObservableObject {
+    
+    var user: UserViewModel = UserViewModel()
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var matchAddFailed = false
-
+    
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
     
-
     
-
+    
+    
     
     
     func getRobots() {
@@ -47,15 +49,12 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    
-    func getNumRobots() -> Int {
-        let numRobotsScouted = self.robots.count
-        return numRobotsScouted
+    func getNumMatches() -> Int {
+        return self.matches.count
     }
     
-    func getNumMatches() -> Int {
-        let numMatchesScouted = self.matches.count
-        return numMatchesScouted
+    func getNumRobots() -> Int {
+        return self.robots.count
     }
     
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String]) {
@@ -85,6 +84,10 @@ class AppViewModel: ObservableObject {
                 }
             }
     }
+
+        
+    
+    
     
     func deleteRobot(robotToDelete: Robot) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -197,4 +200,5 @@ class AppViewModel: ObservableObject {
         }
     }
 }
+
 
