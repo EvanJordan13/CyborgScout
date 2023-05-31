@@ -23,7 +23,7 @@ struct HomeView: View {
                     Button(action: { self.tabSelection = 1}) {
                         HStack {
                                 HStack{
-                                    Label("", systemImage: "note.text")
+                                    Label("", systemImage: "list.bullet.clipboard.text")
                                     Text("Scout A New Robot")
                                         .font(.headline)
                                         .accessibilityAddTraits(.isHeader)
@@ -76,6 +76,30 @@ struct HomeView: View {
                         }
                     }
                     }
+                
+                Section {
+                    
+                    ZStack{
+                        NavigationLink(destination: AccountView()) {
+                        }
+                        .opacity(0.0)
+                        .buttonStyle(PlainButtonStyle())
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "trophy")
+                                VStack{
+                                    Text("View Rankings")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                }
+                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
+                        }
+                    }
+                }
                     
                 
                 

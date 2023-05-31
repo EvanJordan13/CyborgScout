@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class AppViewModel: ObservableObject {
     
@@ -17,10 +18,8 @@ class AppViewModel: ObservableObject {
     
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
-    
-    
-    
-    
+    var averageValuePairs: [String: Int] = [:]
+    var averageScore = 0
     
     
     func getRobots() {
@@ -57,7 +56,7 @@ class AppViewModel: ObservableObject {
         return self.robots.count
     }
     
-    func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String], scores: [Int]) {
+    func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String], scores: [Int], averageScore: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -70,8 +69,7 @@ class AppViewModel: ObservableObject {
             "Can Teleop High": canTeleopHigh,
             "Can Teleop Low": canTeleopLow,
             "Can Taxi": canTaxi,
-            "Autos": autos,
-            "Scores": scores]) { error in
+            "Autos": autos]) { error in
                 
                 // Check for errors
                 if error == nil {
@@ -84,9 +82,26 @@ class AppViewModel: ObservableObject {
                     self.matchAddFailed = true
                 }
             }
-    }
-
         
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
+            "scores": scores]) { error in
+                
+                // Check for errors
+                if error == nil {
+                    // No errors
+                    // Call get data to retrieve latest data
+                    self.getRobots()
+                }
+                else {
+                    // Handle the error
+                    self.matchAddFailed = true
+                }
+            }
+        
+        
+    }
+    
+    
     
     
     
@@ -115,7 +130,11 @@ class AppViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
-        // Add a document to a collection
+        
+        let autoPoints = (autoHighGoal * 4) + (autoLowGoal * 2)
+        let teleopPoints = (teleopHighGoal * 2) + (teleopLowGoal * 1)
+        let teamScore = autoPoints + teleopPoints
+        // Add a match data to database
         db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
             "Match Number": matchNumber,
             "Team Number": teamNumber,
@@ -142,20 +161,31 @@ class AppViewModel: ObservableObject {
             }
         
         
-//        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").setData([
-//            "Match Scores": matchNumber,
-//            ]) { error in
-//                // Check for errors
-//                if error == nil {
-//                    //display succes message
-//                    //self.getMatches()
-//                }
-//                else {
-//                    // Handle the error
-//                }
-//            }
-        
-        
+        //Add individual score to ranking info section of database to be used in overall ranking calclations
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Document doesn't exist")
+                return
+            }
+            
+            var currentScores = document.data()?["scores"] as? [Int] ?? [] // Retrieve the current array field
+            
+            currentScores.append(teamScore) // Append the new value to the array
+            
+            // Update the document with the modified array field
+            db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
+                if let error = error {
+                    print("Error updating document: \(error.localizedDescription)")
+                } else {
+                    print("Scores appended successfully")
+                }
+            }
+        }
     }
     
     func getTeamMatches(teamNumber: String) -> [Match] {
@@ -194,6 +224,104 @@ class AppViewModel: ObservableObject {
         
     }
     
+    func computeAverageScore(teamNumber: String) {
+        //Compute and add average team score to database
+        //Fetch scores array
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+            
+            //Handle errors
+            if let error = error {
+                print("Error fetching document: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Document doesn't exist")
+                return
+            }
+            
+            //Create variables to store database data
+            var currentAverageScore = document.data()?["average score"] as? Int ?? 0 // Retrieve the current array field
+            var currentScores = document.data()?["scores"] as? [Int] ?? [] // Retrieve the current array field
+            
+            
+            //Calculate average of currentScores array
+            var sum = 0
+            var count = currentScores.count
+            currentScores.forEach { score in
+                sum += score
+                
+            }
+            
+            
+            
+            
+            // Update the document with the modified array field
+            db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
+                "average score": sum/count], merge: true) { error in
+                    if let error = error {
+                        print("Error updating document: \(error.localizedDescription)")
+                    } else {
+                        print("Average Score updated successfully")
+                    }
+                }
+        }
+    }
+    
+    //Stores all of the average scores for all robots into a dictionary
+    func storeAllAverageScores() {
+        //get current user's id
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        
+        //Iterate through all matches and add them to the averageValuePairs dictionary
+        robots.forEach { robot in
+            
+            //Compute the Average Score
+            computeAverageScore(teamNumber: robot.teamNumber)
+            //Create variable to store each robot's average score
+            
+            //Get ranking info section from database
+            db.collection("users").document("\(uid)").collection("Robots").document("\(robot.teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+                
+                //Handle errors
+                if let error = error {
+                    print("Error fetching document: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let document = document, document.exists else {
+                    print("Document doesn't exist")
+                    return
+                }
+                //Set the average score of the current robot to the database's data
+                self.averageScore = document.data()?["average score"] as? Int ?? 0
+            }
+            
+            //Add the teamNumber-averageValue pair to the dictionary
+            averageValuePairs[robot.teamNumber] = averageScore
+            
+            //Sort the dictionary by highest to lowest average score9
+        }
+        
+        //Iterate over the dictionary and add the dictionary's data to the database
+        for (team, averageScore) in averageValuePairs {
+            db.collection("users").document("\(uid)").collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
+                "average score": averageScore], merge: true) { error in
+                    if let error = error {
+                        print("Error updating document: \(error.localizedDescription)")
+                    } else {
+                        print("Average Score updated successfully")
+                    }
+                }
+        }
+        
+    }
+    
     func deleteMatch(matchToDelete: Match) {
         let uid = Auth.auth().currentUser!.uid
         // Get a reference to the database
@@ -216,45 +344,11 @@ class AppViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    func assignAverageScores() {
-        
+    //Needed for getting average scores
+    init() {
+        getRobots()
     }
-    
-    
-//    func getAverageMatchScore {
-//        let uid = Auth.auth().currentUser!.uid
-//        let teamMatches = [Match]()
-//        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
-//            if error == nil {
-//                if let snapshot = snapshot {
-//                    DispatchQueue.main.async {
-//                        self.matches = snapshot.documents.map { d in
-//                            return Match(
-//                                id: d.documentID,
-//                                matchNumber: d["Match Number"] as? String ?? "",
-//                                teamNumber: d["Team Number"] as? String ?? "",
-//                                allianceMember1: d["Alliance Member 1"] as? String ?? "",
-//                                allianceMember2: d["Alliance Member 2"] as? String ?? "",
-//                                startingPosition: d["Starting Position"] as? String ?? "",
-//                                preloaded: d["Preloaded With Cargo"] as? Bool ?? false,
-//                                taxied: d["Taxied"] as? Bool ?? false,
-//                                autoHighGoal: d["Auto High Scored"] as? Int ?? 0,
-//                                autoLowGoal: d["Auto Low Scored"] as? Int ?? 0,
-//                                teleopHighGoal: d["Teleop High Scored"] as? Int ?? 0,
-//                                teleopLowGoal: d["Teleop Low Scored"] as? Int ?? 0,
-//                                playedDefense: d["Played Defense"] as? Bool ?? false,
-//                                win: d["Won Match"] as? Bool ?? false,
-//                                finalScore: d["Final Score"] as? String ?? "")
-//                        }
-//                    }
-//                }
-//            } else {
-//                //handle error
-//            }
-//        }
-//    }
 }
+
 
 

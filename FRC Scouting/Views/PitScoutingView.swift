@@ -16,7 +16,8 @@ struct PitScoutingView: View {
     @FocusState private var focusedField: FieldToFocus?
     @State private var showingAddRobotSuccessAlert = false
     @State private var showingAddRobotFailAlert = false
-   
+    @State var scores = [Int]()
+    @State var averageScore = 0
     @State var selectedAutos = [String]()
     @State var allItems:[String] = [
         "Pilots Left",
@@ -39,7 +40,7 @@ struct PitScoutingView: View {
     @State var canTeleopHighScore = false
     @State var canTeleopLowScore = false
     @State var canTaxi = false
-    var scores = [Int]()
+    
 
     
     var body: some View {
@@ -83,7 +84,7 @@ struct PitScoutingView: View {
                 
                 Button(action: {
                     if ((teamNumber.count > 0)) {
-                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos, scores: scores)
+                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos, scores: scores, averageScore: averageScore)
                         if (model.matchAddFailed == false) {
                             showingAddRobotSuccessAlert = true
                         }

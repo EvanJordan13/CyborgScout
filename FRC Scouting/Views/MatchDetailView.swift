@@ -149,8 +149,6 @@ struct MatchDetailView: View {
                 
                 
             }
-        
-        
     }
 }
 

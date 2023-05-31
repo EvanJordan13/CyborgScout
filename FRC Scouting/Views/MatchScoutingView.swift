@@ -101,6 +101,7 @@ struct MatchScoutingView: View {
                         model.addMatch(matchNumber: matchNumber, teamNumber: teamNumber, allianceMember1: allianceMember1, allianceMember2: allianceMember2, startingPosition: selectedAuto, preloaded: preloaded, taxied: taxied, autoHighGoal: autoHighGoal, autoLowGoal: autoLowGoal, teleopHighGoal: teleopHighGoal, teleopLowGoal: teleopLowGoal, playedDefense: playedDefense, win: win, finalScore: finalScore)
                         if (model.matchAddFailed == false) {
                             showingAddRobotSuccessAlert = true
+                            model.storeAllAverageScores()
                         }
                     } else {
                         showingAddRobotFailAlert = true
