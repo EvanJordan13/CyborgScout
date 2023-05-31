@@ -19,7 +19,9 @@ class AppViewModel: ObservableObject {
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
     var averageValuePairs: [String: Int] = [:]
+    
     var averageScore = 0
+    var averageTeamScore = 69
     
     
     func getRobots() {
@@ -299,13 +301,18 @@ class AppViewModel: ObservableObject {
                     return
                 }
                 //Set the average score of the current robot to the database's data
-                self.averageScore = document.data()?["average score"] as? Int ?? 0
+                self.averageScore = document.data()?["average score"] as? Int ?? 98
             }
             
             //Add the teamNumber-averageValue pair to the dictionary
             averageValuePairs[robot.teamNumber] = averageScore
             
-            //Sort the dictionary by highest to lowest average score9
+            
+            
+            
+            
+            
+            
         }
         
         //Iterate over the dictionary and add the dictionary's data to the database
@@ -320,6 +327,38 @@ class AppViewModel: ObservableObject {
                 }
         }
         
+    }
+    
+    
+    //Returns the average score of a desired team
+    func getAverageScore(teamNumber: String, completion: @escaping (Result<Int, Error>) -> Void) {
+        //Get current user's uid
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        //Create variable to hold specific document reference
+        let docRef = db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info")
+        //Get snapshot of the document
+        docRef.getDocument { (document, error) in
+            //Handle error if there is an issue getting document
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            //More error handling
+            guard let document = document, document.exists else {
+                let documentNotFoundError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Document doesn't exist ehe"])
+                completion(.failure(documentNotFoundError))
+                return
+            }
+            //Mark getting data as a sucess if value is stored correctly. If not, handle error
+            if let value = document.data()?["average score"] as? Int {
+                completion(.success(value))
+            } else {
+                let invalidDataError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid data type or field not found"])
+                completion(.failure(invalidDataError))
+            }
+        }
     }
     
     func deleteMatch(matchToDelete: Match) {

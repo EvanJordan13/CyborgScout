@@ -23,7 +23,7 @@ struct ContentView: View {
                     
                     PitScoutingView()
                         .tabItem{
-                            Label("Pit Scouting", systemImage: "list.bullet.clipboard.text")
+                            Label("Pit Scouting", systemImage: "list.bullet.clipboard")
                         }
                         .tag(1)
                     

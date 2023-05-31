@@ -17,14 +17,7 @@ struct RobotCardView: View {
             Text("Team \(robot.teamNumber)")
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
-            Spacer()
-            HStack {
-                Label("Average Points: \(robot.teamNumber)", systemImage: "flag.2.crossed")
-                Spacer()
-                Label("Rank: --", systemImage: "flag")
-                
-            }
-            .font(.caption)
+            
         }
         .padding()
         .foregroundColor(.primary)

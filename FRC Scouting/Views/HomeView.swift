@@ -23,7 +23,7 @@ struct HomeView: View {
                     Button(action: { self.tabSelection = 1}) {
                         HStack {
                                 HStack{
-                                    Label("", systemImage: "list.bullet.clipboard.text")
+                                    Label("", systemImage: "list.bullet.clipboard")
                                     Text("Scout A New Robot")
                                         .font(.headline)
                                         .accessibilityAddTraits(.isHeader)
@@ -80,7 +80,7 @@ struct HomeView: View {
                 Section {
                     
                     ZStack{
-                        NavigationLink(destination: AccountView()) {
+                        NavigationLink(destination: RankingsView()) {
                         }
                         .opacity(0.0)
                         .buttonStyle(PlainButtonStyle())
@@ -134,7 +134,7 @@ struct HomeView: View {
         }
         
         .onAppear {
-            //user.sync()
+            viewModel.storeAllAverageScores()
         }
         
     }
