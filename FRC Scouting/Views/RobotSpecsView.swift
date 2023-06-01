@@ -34,6 +34,14 @@ struct RobotSpecsView: View {
                 }
             }
             .navigationTitle("Matches")
+            Section {
+                ForEach(model.tbaTeams, id: \.self) { team in
+                    Text(team.nickname)
+                }
+            }
+        }
+        .onAppear {
+            model.fetchTBATeam(teamNumber: teamNumber)
         }
         .refreshable {
             model.getRobots()

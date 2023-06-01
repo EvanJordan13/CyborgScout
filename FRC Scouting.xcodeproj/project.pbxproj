@@ -29,6 +29,9 @@
 		517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517DFC0B2828741200109B2D /* RobotSpecs.swift */; };
 		518DFEEA2A23F59B009A463C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEE92A23F59B009A463C /* UserViewModel.swift */; };
 		518DFEF22A26C64F009A463C /* RankingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF12A26C64F009A463C /* RankingsView.swift */; };
+		518DFEF42A2838F3009A463C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF32A2838F3009A463C /* Event.swift */; };
+		518DFEF62A283D65009A463C /* TBATeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF52A283D65009A463C /* TBATeam.swift */; };
+		518DFEF82A284710009A463C /* TeamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF72A284710009A463C /* TeamInfoView.swift */; };
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
 		51C0D9152953C42500B2B559 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D9142953C42500B2B559 /* AccountView.swift */; };
 		51C0D91929550F9800B2B559 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C0D91829550F9800B2B559 /* SignUpView.swift */; };
@@ -79,6 +82,9 @@
 		517DFC0B2828741200109B2D /* RobotSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotSpecs.swift; sourceTree = "<group>"; };
 		518DFEE92A23F59B009A463C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		518DFEF12A26C64F009A463C /* RankingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingsView.swift; sourceTree = "<group>"; };
+		518DFEF32A2838F3009A463C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		518DFEF52A283D65009A463C /* TBATeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBATeam.swift; sourceTree = "<group>"; };
+		518DFEF72A284710009A463C /* TeamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInfoView.swift; sourceTree = "<group>"; };
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		51C0D9142953C42500B2B559 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		51C0D91829550F9800B2B559 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				51C0D9142953C42500B2B559 /* AccountView.swift */,
 				51C0D91829550F9800B2B559 /* SignUpView.swift */,
 				518DFEF12A26C64F009A463C /* RankingsView.swift */,
+				518DFEF72A284710009A463C /* TeamInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,6 +166,8 @@
 				5174430E287F34F800425B71 /* Robot.swift */,
 				51EE63612890EBED0010BEE2 /* Match.swift */,
 				51C0D91A2955137B00B2B559 /* User.swift */,
+				518DFEF32A2838F3009A463C /* Event.swift */,
+				518DFEF52A283D65009A463C /* TBATeam.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -383,11 +392,14 @@
 				517DFBD8282867A700109B2D /* FRC_ScoutingApp.swift in Sources */,
 				51EE636E289A1ADB0010BEE2 /* MatchDetailView.swift in Sources */,
 				517341202852869A003052FB /* HomeView.swift in Sources */,
+				518DFEF62A283D65009A463C /* TBATeam.swift in Sources */,
 				518DFEEA2A23F59B009A463C /* UserViewModel.swift in Sources */,
 				51ED879728505875006B4771 /* ContentView.swift in Sources */,
 				517DFC0C2828741200109B2D /* RobotSpecs.swift in Sources */,
 				51C0D91929550F9800B2B559 /* SignUpView.swift in Sources */,
 				51EE63622890EBED0010BEE2 /* Match.swift in Sources */,
+				518DFEF82A284710009A463C /* TeamInfoView.swift in Sources */,
+				518DFEF42A2838F3009A463C /* Event.swift in Sources */,
 				51C0D91B2955137B00B2B559 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

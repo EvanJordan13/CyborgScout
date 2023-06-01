@@ -100,6 +100,30 @@ struct HomeView: View {
                         }
                     }
                 }
+                
+                Section {
+                    ZStack{
+                        NavigationLink(destination: TeamInfoView()) {
+                        }
+                        .opacity(0.0)
+                        .buttonStyle(PlainButtonStyle())
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "trophy")
+                                VStack{
+                                    Text("View Team Info")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                }
+                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
+                        }
+                    }
+                }
+
                     
                 
                 

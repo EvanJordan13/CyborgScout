@@ -18,11 +18,9 @@ class AppViewModel: ObservableObject {
     
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
+    @Published var tbaTeams: [TBATeam] = []
     var averageValuePairs: [String: Int] = [:]
-    
     var averageScore = 0
-    var averageTeamScore = 69
-    
     
     func getRobots() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -48,14 +46,6 @@ class AppViewModel: ObservableObject {
                 print("Fetching Robots Failed")
             }
         }
-    }
-    
-    func getNumMatches() -> Int {
-        return self.matches.count
-    }
-    
-    func getNumRobots() -> Int {
-        return self.robots.count
     }
     
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String], scores: [Int], averageScore: Int) {
@@ -102,10 +92,6 @@ class AppViewModel: ObservableObject {
         
         
     }
-    
-    
-    
-    
     
     func deleteRobot(robotToDelete: Robot) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -246,20 +232,14 @@ class AppViewModel: ObservableObject {
             }
             
             //Create variables to store database data
-            var currentAverageScore = document.data()?["average score"] as? Int ?? 0 // Retrieve the current array field
-            var currentScores = document.data()?["scores"] as? [Int] ?? [] // Retrieve the current array field
-            
-            
+            let currentScores = document.data()?["scores"] as? [Int] ?? [] // Retrieve the current array field
             //Calculate average of currentScores array
             var sum = 0
-            var count = currentScores.count
+            let count = currentScores.count
             currentScores.forEach { score in
                 sum += score
                 
             }
-            
-            
-            
             
             // Update the document with the modified array field
             db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
@@ -383,6 +363,34 @@ class AppViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    func fetchTBATeam(teamNumber: String) {
+        guard let url = URL(string: "https://www.thebluealliance.com/api/v3/team/\(teamNumber)") else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+    
+            do {
+                let tbaTeams = try JSONDecoder().decode([TBATeam].self, from: data)
+                DispatchQueue.main.async {
+                    self?.tbaTeams = tbaTeams
+                }
+            } catch {
+                print(error)
+            }
+            
+        }
+        task.resume()
+    }
+    
+    
+    
+    
     //Needed for getting average scores
     init() {
         getRobots()
