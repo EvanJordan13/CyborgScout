@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct Event: Hashable, Codable {
-    
+struct StatboticsEvent: Codable {
+    let key: String
+    let name: String
+    let week: Int
 }

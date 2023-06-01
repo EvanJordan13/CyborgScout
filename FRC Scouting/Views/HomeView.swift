@@ -103,7 +103,7 @@ struct HomeView: View {
                 
                 Section {
                     ZStack{
-                        NavigationLink(destination: TeamInfoView()) {
+                        NavigationLink(destination: APIView()) {
                         }
                         .opacity(0.0)
                         .buttonStyle(PlainButtonStyle())

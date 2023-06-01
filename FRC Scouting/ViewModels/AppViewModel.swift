@@ -18,7 +18,11 @@ class AppViewModel: ObservableObject {
     
     @Published var robots = [Robot]()
     @Published var matches = [Match]()
-    @Published var tbaTeams: [TBATeam] = []
+    @Published var tbaTeams = [TBATeam]()
+    @Published var tbaRobots = [TBARobot]()
+    @Published var apiUser = [APIUser]()
+    @Published var statboticsMatches = [StatboticsMatch]()
+    @Published var statboticsEvents = [StatboticsEvent]()
     var averageValuePairs: [String: Int] = [:]
     var averageScore = 0
     
@@ -365,28 +369,104 @@ class AppViewModel: ObservableObject {
     }
     
     
-    func fetchTBATeam(teamNumber: String) {
-        guard let url = URL(string: "https://www.thebluealliance.com/api/v3/team/\(teamNumber)") else {
+    func fetchTBARobots() async {
+        guard let url = URL(string:"https://www.thebluealliance.com/api/v3/team/frc4256/robots") else {
+            print("URL doesnt work")
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-    
-            do {
-                let tbaTeams = try JSONDecoder().decode([TBATeam].self, from: data)
-                DispatchQueue.main.async {
-                    self?.tbaTeams = tbaTeams
-                }
-            } catch {
-                print(error)
-            }
+        
+        var request = URLRequest(url: url)
+            request.addValue("Bearer YQLqmSzFfcPN3g6m50xm89H5zqm3TPOFEQmzYlRtlpjN0PHMouxob1p61NUfpovT", forHTTPHeaderField: "Authorization")  // Replace YOUR_AUTH_TOKEN with your actual token
             
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            if let decodedResponse = try? JSONDecoder().decode([TBARobot].self, from: data) {
+                print("should have worked")
+                DispatchQueue.main.async {
+                    self.tbaRobots = decodedResponse
+                }
+                
+            } else {
+                print("didnt decode")
+            }
+        } catch {
+            print("data isnt valid")
         }
-        task.resume()
     }
+    
+    func fetchUser() async {
+        guard let url = URL(string:"https://jsonplaceholder.typicode.com/users") else {
+            print("URL doesnt work")
+            return
+        }
+        
+        do {
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let decodedResponse = try? JSONDecoder().decode([APIUser].self, from: data) {
+                print("should have worked")
+                DispatchQueue.main.async {
+                    self.apiUser = decodedResponse
+                }
+                
+            } else {
+                print("didnt decode")
+            }
+        } catch {
+            print("data isnt valid")
+        }
+    }
+    
+    func fetchStatboticsMatches() async {
+        guard let url = URL(string:"https://api.statbotics.io/v2/matches/team/4256/year/2023") else {
+            print("URL doesnt work")
+            return
+        }
+        
+        do {
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let decodedResponse = try? JSONDecoder().decode([StatboticsMatch].self, from: data) {
+                print("should have worked")
+                DispatchQueue.main.async {
+                    self.statboticsMatches = decodedResponse
+                }
+                
+            } else {
+                print("didnt decode")
+            }
+        } catch {
+            print("data isnt valid")
+        }
+    }
+    
+    func fetchStatboticsEvents() async {
+        guard let url = URL(string:"https://api.statbotics.io/v2/events/year/2023") else {
+            print("URL doesnt work")
+            return
+        }
+        
+        do {
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let decodedResponse = try? JSONDecoder().decode([StatboticsEvent].self, from: data) {
+                print("should have worked")
+                DispatchQueue.main.async {
+                    self.statboticsEvents = decodedResponse
+                }
+                
+            } else {
+                print("didnt decode")
+            }
+        } catch {
+            print("data isnt valid")
+        }
+    }
+    
     
     
     

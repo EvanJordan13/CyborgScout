@@ -40,9 +40,6 @@ struct RobotSpecsView: View {
                 }
             }
         }
-        .onAppear {
-            model.fetchTBATeam(teamNumber: teamNumber)
-        }
         .refreshable {
             model.getRobots()
         }

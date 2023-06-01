@@ -8,7 +8,6 @@
 import Foundation
 
 struct TBATeam: Hashable, Codable {
-    
       let address: String
       let city: String
       let country: String
