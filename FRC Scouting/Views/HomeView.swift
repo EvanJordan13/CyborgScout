@@ -18,22 +18,45 @@ struct HomeView: View {
             
             List {
                 
+                Section {
+                    ZStack{
+                        NavigationLink(destination: EventsView()) {
+                        }
+                        .opacity(0.0)
+                        .buttonStyle(PlainButtonStyle())
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "trophy")
+                                VStack{
+                                    Text("Select Event Being Scouted")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                }
+                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
+                        }
+                    }
+                }
+                
                 
                 Section {
                     Button(action: { self.tabSelection = 1}) {
                         HStack {
-                                HStack{
-                                    Label("", systemImage: "list.bullet.clipboard")
-                                    Text("Scout A New Robot")
-                                        .font(.headline)
-                                        .accessibilityAddTraits(.isHeader)
+                            HStack{
+                                Label("", systemImage: "list.bullet.clipboard")
+                                Text("Scout A New Robot")
+                                    .font(.headline)
+                                    .accessibilityAddTraits(.isHeader)
                                     .font(.caption)
-                                }
-                                .navigationTitle("Cyborg Scout")
-                                .padding()
-                                .foregroundColor(.primary)
-                                Spacer()
-                                Label("", systemImage: "chevron.right")
+                            }
+                            .navigationTitle("Cyborg Scout")
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
                             
                         }
                     }
@@ -56,7 +79,7 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
-                    }
+                }
                 
                 
                 Section {
@@ -75,7 +98,7 @@ struct HomeView: View {
                             Label("", systemImage: "chevron.right")
                         }
                     }
-                    }
+                }
                 
                 Section {
                     
@@ -101,58 +124,58 @@ struct HomeView: View {
                     }
                 }
                 
-                Section {
-                    ZStack{
-                        NavigationLink(destination: APIView()) {
-                        }
-                        .opacity(0.0)
-                        .buttonStyle(PlainButtonStyle())
-                        HStack{
-                            HStack {
-                                Label("", systemImage: "trophy")
-                                VStack{
-                                    Text("View Team Info")
-                                        .font(.headline)
-                                        .accessibilityAddTraits(.isHeader)
+//                Section {
+//                    ZStack{
+//                        NavigationLink(destination: EventsView()) {
+//                        }
+//                        .opacity(0.0)
+//                        .buttonStyle(PlainButtonStyle())
+//                        HStack{
+//                            HStack {
+//                                Label("", systemImage: "trophy")
+//                                VStack{
+//                                    Text("View Team Info")
+//                                        .font(.headline)
+//                                        .accessibilityAddTraits(.isHeader)
+//                                }
+//                            }
+//                            .padding()
+//                            .foregroundColor(.primary)
+//                            Spacer()
+//                            Label("", systemImage: "chevron.right")
+//                        }
+//                    }
+//                }
+                
+                
+                
+                
+                
+                                Section {
+                
+                                    ZStack{
+                                        NavigationLink(destination: AccountView()) {
+                                        }
+                                        .opacity(0.0)
+                                        .buttonStyle(PlainButtonStyle())
+                                        HStack{
+                                            HStack {
+                                                Label("", systemImage: "person")
+                                                VStack{
+                                                    Text("View Account")
+                                                        .font(.headline)
+                                                        .accessibilityAddTraits(.isHeader)
+                                                    Text("Logged In As: \(user.user?.username ?? "")")
+                                                        .font(.caption)
+                                                }
+                                            }
+                                            .padding()
+                                            .foregroundColor(.primary)
+                                            Spacer()
+                                            Label("", systemImage: "chevron.right")
+                                        }
+                                    }
                                 }
-                            }
-                            .padding()
-                            .foregroundColor(.primary)
-                            Spacer()
-                            Label("", systemImage: "chevron.right")
-                        }
-                    }
-                }
-
-                    
-                
-                
-                
-                Section {
-                    
-                    ZStack{
-                        NavigationLink(destination: AccountView()) {
-                        }
-                        .opacity(0.0)
-                        .buttonStyle(PlainButtonStyle())
-                        HStack{
-                            HStack {
-                                Label("", systemImage: "person")
-                                VStack{
-                                    Text("View Account")
-                                        .font(.headline)
-                                        .accessibilityAddTraits(.isHeader)
-                                    Text("Logged In As: \(user.user?.username ?? "")")
-                                        .font(.caption)
-                                }
-                            }
-                            .padding()
-                            .foregroundColor(.primary)
-                            Spacer()
-                            Label("", systemImage: "chevron.right")
-                        }
-                    }
-                }
                 
             }
         }

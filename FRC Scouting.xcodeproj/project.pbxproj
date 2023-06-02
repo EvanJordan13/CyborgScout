@@ -32,7 +32,7 @@
 		518DFEF42A2838F3009A463C /* StatboticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF32A2838F3009A463C /* StatboticsEvent.swift */; };
 		518DFEF62A283D65009A463C /* TBATeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF52A283D65009A463C /* TBATeam.swift */; };
 		518DFEFA2A28FB33009A463C /* TBARobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEF92A28FB33009A463C /* TBARobot.swift */; };
-		518DFF002A293843009A463C /* APIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEFF2A293843009A463C /* APIView.swift */; };
+		518DFF002A293843009A463C /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFEFF2A293843009A463C /* EventsView.swift */; };
 		518DFF022A293A82009A463C /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFF012A293A82009A463C /* APIUser.swift */; };
 		518DFF042A29482C009A463C /* StatboticsMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DFF032A29482C009A463C /* StatboticsMatch.swift */; };
 		518ED4C728792273003B06CD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518ED4C628792273003B06CD /* LoginView.swift */; };
@@ -88,7 +88,7 @@
 		518DFEF32A2838F3009A463C /* StatboticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatboticsEvent.swift; sourceTree = "<group>"; };
 		518DFEF52A283D65009A463C /* TBATeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBATeam.swift; sourceTree = "<group>"; };
 		518DFEF92A28FB33009A463C /* TBARobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBARobot.swift; sourceTree = "<group>"; };
-		518DFEFF2A293843009A463C /* APIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIView.swift; sourceTree = "<group>"; };
+		518DFEFF2A293843009A463C /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		518DFF012A293A82009A463C /* APIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUser.swift; sourceTree = "<group>"; };
 		518DFF032A29482C009A463C /* StatboticsMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatboticsMatch.swift; sourceTree = "<group>"; };
 		518ED4C628792273003B06CD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				51C0D9142953C42500B2B559 /* AccountView.swift */,
 				51C0D91829550F9800B2B559 /* SignUpView.swift */,
 				518DFEF12A26C64F009A463C /* RankingsView.swift */,
-				518DFEFF2A293843009A463C /* APIView.swift */,
+				518DFEFF2A293843009A463C /* EventsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,7 +390,7 @@
 				5174430D287F344400425B71 /* AppViewModel.swift in Sources */,
 				5174430F287F34F800425B71 /* Robot.swift in Sources */,
 				51EE63662891FF8A0010BEE2 /* MatchCardView.swift in Sources */,
-				518DFF002A293843009A463C /* APIView.swift in Sources */,
+				518DFF002A293843009A463C /* EventsView.swift in Sources */,
 				51C0D9152953C42500B2B559 /* AccountView.swift in Sources */,
 				518DFF042A29482C009A463C /* StatboticsMatch.swift in Sources */,
 				518DFF022A293A82009A463C /* APIUser.swift in Sources */,
