@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct EventsView: View {
-    @ObservedObject var model = AppViewModel()
-    @State private var selectedEvent = ""
-    @State private var showingAddEventSuccessAlert = false
+    @StateObject var model = AppViewModel()
+    @State var selectedEvent = ""
+    @State var showingAddEventSuccessAlert = false
     
     var body: some View {
         let events = model.statboticsEvents
@@ -26,6 +26,7 @@ struct EventsView: View {
                         }
                     }
                     Button(action: {
+                        //model.setCurrentEvent(event: selectedEvent)
                         model.currentEvent = selectedEvent
                         showingAddEventSuccessAlert = true
                     },

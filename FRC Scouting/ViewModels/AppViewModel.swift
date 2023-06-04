@@ -23,7 +23,7 @@ class AppViewModel: ObservableObject {
     @Published var apiUser = [APIUser]()
     @Published var statboticsMatches = [StatboticsMatch]()
     @Published var statboticsEvents = [StatboticsEvent]()
-    @Published var currentEvent = "none"
+    @Published var currentEvent = "blank"
     var averageValuePairs: [String: Int] = [:]
     var averageScore = 0
     
@@ -58,7 +58,7 @@ class AppViewModel: ObservableObject {
         // Get a reference to the database
         let db = Firestore.firestore()
         // Add a document to a collection
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").setData([
+        db.collection("users").document("\(uid)").collection("Events").document("\(currentEvent)").collection("Robots").document("\(teamNumber)").setData([
             "Team Number": teamNumber,
             "Drivetrain": drivetrain,
             "Can Auto High": canAutoHigh,
@@ -79,8 +79,8 @@ class AppViewModel: ObservableObject {
                     self.matchAddFailed = true
                 }
             }
-        
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
+        print(currentEvent)
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
             "scores": scores]) { error in
                 
                 // Check for errors
@@ -103,7 +103,7 @@ class AppViewModel: ObservableObject {
         // Get a reference to the database
         let db = Firestore.firestore()
         // Specify the document to delete
-        db.collection("users").document("\(uid)").collection("Robots").document(robotToDelete.id).delete { error in
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document(robotToDelete.id).delete { error in
             // Check for errors
             if error == nil {
                 // No errors
@@ -128,7 +128,7 @@ class AppViewModel: ObservableObject {
         let teleopPoints = (teleopHighGoal * 2) + (teleopLowGoal * 1)
         let teamScore = autoPoints + teleopPoints
         // Add a match data to database
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Matches").document("\(matchNumber)").setData([
             "Match Number": matchNumber,
             "Team Number": teamNumber,
             "Alliance Member 1": allianceMember1,
@@ -155,7 +155,7 @@ class AppViewModel: ObservableObject {
         
         
         //Add individual score to ranking info section of database to be used in overall ranking calclations
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
             if let error = error {
                 print("Error fetching document: \(error.localizedDescription)")
                 return
@@ -171,7 +171,7 @@ class AppViewModel: ObservableObject {
             currentScores.append(teamScore) // Append the new value to the array
             
             // Update the document with the modified array field
-            db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
+            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
                 if let error = error {
                     print("Error updating document: \(error.localizedDescription)")
                 } else {
@@ -183,8 +183,7 @@ class AppViewModel: ObservableObject {
     
     func getTeamMatches(teamNumber: String) -> [Match] {
         let uid = Auth.auth().currentUser!.uid
-        let teamMatches = [Match]()
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
             if error == nil {
                 if let snapshot = snapshot {
                     DispatchQueue.main.async {
@@ -223,7 +222,7 @@ class AppViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
-        db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
             
             //Handle errors
             if let error = error {
@@ -247,7 +246,7 @@ class AppViewModel: ObservableObject {
             }
             
             // Update the document with the modified array field
-            db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
+            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": sum/count], merge: true) { error in
                     if let error = error {
                         print("Error updating document: \(error.localizedDescription)")
@@ -273,7 +272,7 @@ class AppViewModel: ObservableObject {
             //Create variable to store each robot's average score
             
             //Get ranking info section from database
-            db.collection("users").document("\(uid)").collection("Robots").document("\(robot.teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
+            db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(robot.teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
                 
                 //Handle errors
                 if let error = error {
@@ -302,7 +301,7 @@ class AppViewModel: ObservableObject {
         
         //Iterate over the dictionary and add the dictionary's data to the database
         for (team, averageScore) in averageValuePairs {
-            db.collection("users").document("\(uid)").collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
+            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": averageScore], merge: true) { error in
                     if let error = error {
                         print("Error updating document: \(error.localizedDescription)")
@@ -322,7 +321,7 @@ class AppViewModel: ObservableObject {
         // Get a reference to the database
         let db = Firestore.firestore()
         //Create variable to hold specific document reference
-        let docRef = db.collection("users").document("\(uid)").collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info")
+        let docRef = db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info")
         //Get snapshot of the document
         docRef.getDocument { (document, error) in
             //Handle error if there is an issue getting document
@@ -351,7 +350,7 @@ class AppViewModel: ObservableObject {
         // Get a reference to the database
         let db = Firestore.firestore()
         // Specify the document to delete
-        db.collection("users").document("\(uid)").collection("Robots").document("\(matchToDelete.teamNumber)").collection("Matches").document(matchToDelete.id).delete { error in
+        db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(matchToDelete.teamNumber)").collection("Matches").document(matchToDelete.id).delete { error in
             // Check for errors
             if error == nil {
                 // No errors
@@ -466,6 +465,12 @@ class AppViewModel: ObservableObject {
         } catch {
             print("data isnt valid")
         }
+    }
+    
+    func setCurrentEvent(event: String) {
+        let eventSelected = event
+        self.currentEvent = eventSelected
+        print(self.currentEvent)
     }
     
     
