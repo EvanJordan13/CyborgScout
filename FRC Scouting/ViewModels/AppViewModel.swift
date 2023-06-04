@@ -23,7 +23,7 @@ class AppViewModel: ObservableObject {
     @Published var apiUser = [APIUser]()
     @Published var statboticsMatches = [StatboticsMatch]()
     @Published var statboticsEvents = [StatboticsEvent]()
-    @Published var currentEvent = "blank"
+    @Published var currentEvent = "empty"
     var averageValuePairs: [String: Int] = [:]
     var averageScore = 0
     
