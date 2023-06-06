@@ -26,15 +26,14 @@ struct EventsView: View {
                         }
                     }
                     Button(action: {
-                        //model.setCurrentEvent(event: selectedEvent)
-                        model.currentEvent = selectedEvent
+                        model.setCurrentEvent(event: selectedEvent)
                         showingAddEventSuccessAlert = true
                     },
                            label: {
                         Text("Confirm Event")
                             .foregroundColor(Color.blue)
                     })
-                    .alert("Now scouting for \(model.currentEvent). To change event, change selection and confirm again. Happy Scouting!", isPresented: $showingAddEventSuccessAlert) {
+                    .alert("Now scouting for \(selectedEvent). To change event, change selection and confirm again. Happy Scouting!", isPresented: $showingAddEventSuccessAlert) {
                                 Button("OK", role: .cancel) { }
                             }
                 }

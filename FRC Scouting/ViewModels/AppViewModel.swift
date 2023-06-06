@@ -23,7 +23,6 @@ class AppViewModel: ObservableObject {
     @Published var apiUser = [APIUser]()
     @Published var statboticsMatches = [StatboticsMatch]()
     @Published var statboticsEvents = [StatboticsEvent]()
-    @Published var currentEvent = "empty"
     var averageValuePairs: [String: Int] = [:]
     var averageScore = 0
     
@@ -54,6 +53,27 @@ class AppViewModel: ObservableObject {
     }
     
     func addRobot(teamNumber: String, drivetrain: String, canAutoHigh: Bool, canAutoLow: Bool, canTeleopHigh: Bool, canTeleopLow: Bool, canTaxi: Bool, autos: [String], scores: [Int], averageScore: Int) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
+        
+       
+        
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -99,6 +119,23 @@ class AppViewModel: ObservableObject {
     }
     
     func deleteRobot(robotToDelete: Robot) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -120,6 +157,24 @@ class AppViewModel: ObservableObject {
     }
     
     func addMatch(matchNumber: String, teamNumber: String, allianceMember1: String, allianceMember2: String, startingPosition: String, preloaded: Bool, taxied: Bool, autoHighGoal: Int, autoLowGoal: Int, teleopHighGoal: Int, teleopLowGoal: Int, playedDefense: Bool, win: Bool, finalScore: String) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -171,7 +226,7 @@ class AppViewModel: ObservableObject {
             currentScores.append(teamScore) // Append the new value to the array
             
             // Update the document with the modified array field
-            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
+            db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
                 if let error = error {
                     print("Error updating document: \(error.localizedDescription)")
                 } else {
@@ -182,6 +237,23 @@ class AppViewModel: ObservableObject {
     }
     
     func getTeamMatches(teamNumber: String) -> [Match] {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         let uid = Auth.auth().currentUser!.uid
         db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Matches").getDocuments { snapshot, error in
             if error == nil {
@@ -217,6 +289,23 @@ class AppViewModel: ObservableObject {
     }
     
     func computeAverageScore(teamNumber: String) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         //Compute and add average team score to database
         //Fetch scores array
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -246,7 +335,7 @@ class AppViewModel: ObservableObject {
             }
             
             // Update the document with the modified array field
-            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
+            db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": sum/count], merge: true) { error in
                     if let error = error {
                         print("Error updating document: \(error.localizedDescription)")
@@ -259,6 +348,24 @@ class AppViewModel: ObservableObject {
     
     //Stores all of the average scores for all robots into a dictionary
     func storeAllAverageScores() {
+        
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         //get current user's id
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
@@ -301,7 +408,7 @@ class AppViewModel: ObservableObject {
         
         //Iterate over the dictionary and add the dictionary's data to the database
         for (team, averageScore) in averageValuePairs {
-            db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
+            db.collection("users").document("\(uid)").collection("Events").document(currentEvent).collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": averageScore], merge: true) { error in
                     if let error = error {
                         print("Error updating document: \(error.localizedDescription)")
@@ -316,6 +423,23 @@ class AppViewModel: ObservableObject {
     
     //Returns the average score of a desired team
     func getAverageScore(teamNumber: String, completion: @escaping (Result<Int, Error>) -> Void) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         //Get current user's uid
         guard let uid = Auth.auth().currentUser?.uid else { return }
         // Get a reference to the database
@@ -346,6 +470,23 @@ class AppViewModel: ObservableObject {
     }
     
     func deleteMatch(matchToDelete: Match) {
+        
+        var currentEvent = ""
+        
+        getCurrentEvent { value in
+                if let value = value {
+                    // Assign the value to a variable or use it in any other way
+                    currentEvent = value
+                    
+                    // Call other functions or perform actions using the variable
+                    // ...
+                } else {
+                    // Handle the case where the value is nil or an error occurred
+                    // ...
+                    print("Could not add robot. Invalid Current Event")
+                }
+            }
+        
         let uid = Auth.auth().currentUser!.uid
         // Get a reference to the database
         let db = Firestore.firestore()
@@ -368,58 +509,6 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    
-    func fetchTBARobots() async {
-        guard let url = URL(string:"https://www.thebluealliance.com/api/v3/team/frc4256/robots") else {
-            print("URL doesnt work")
-            return
-        }
-        
-        
-        var request = URLRequest(url: url)
-            request.addValue("Bearer YQLqmSzFfcPN3g6m50xm89H5zqm3TPOFEQmzYlRtlpjN0PHMouxob1p61NUfpovT", forHTTPHeaderField: "Authorization")  // Replace YOUR_AUTH_TOKEN with your actual token
-            
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            if let decodedResponse = try? JSONDecoder().decode([TBARobot].self, from: data) {
-                print("should have worked")
-                DispatchQueue.main.async {
-                    self.tbaRobots = decodedResponse
-                }
-                
-            } else {
-                print("didnt decode")
-            }
-        } catch {
-            print("data isnt valid")
-        }
-    }
-    
-    func fetchUser() async {
-        guard let url = URL(string:"https://jsonplaceholder.typicode.com/users") else {
-            print("URL doesnt work")
-            return
-        }
-        
-        do {
-            
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let decodedResponse = try? JSONDecoder().decode([APIUser].self, from: data) {
-                print("should have worked")
-                DispatchQueue.main.async {
-                    self.apiUser = decodedResponse
-                }
-                
-            } else {
-                print("didnt decode")
-            }
-        } catch {
-            print("data isnt valid")
-        }
-    }
     
     func fetchStatboticsMatches() async {
         guard let url = URL(string:"https://api.statbotics.io/v2/matches/team/4256/year/2023") else {
@@ -468,11 +557,59 @@ class AppViewModel: ObservableObject {
     }
     
     func setCurrentEvent(event: String) {
-        let eventSelected = event
-        self.currentEvent = eventSelected
-        print(self.currentEvent)
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        
+        db.collection("users").document("\(uid)").setData([
+            "Current Event": event
+        ]) { error in
+            // Check for errors
+            if error == nil {
+                //display succes message
+                print("selected current event succesfull. Current event: \(event)")
+            }
+            else {
+                // Handle the error
+                print("Selected event assignement failed")
+            }
+        }
     }
     
+    //returns the current event being scouted
+    func getCurrentEvent(completion: @escaping (String?) -> Void) {
+        // Replace "your-firebase-project-id" with your actual Firebase project ID
+        //Get current user's uid
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        // Get a reference to the database
+        let db = Firestore.firestore()
+        //Create variable to hold specific document reference
+        let docRef = db.collection("users").document("\(uid)")
+        
+        // Replace "your-collection" and "your-document" with the path to your document
+        docRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error fetching document: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let snapshot = snapshot, snapshot.exists else {
+                print("Document does not exist")
+                completion(nil)
+                return
+            }
+            
+            // Replace "your-field" with the field name you want to retrieve
+            if let fieldValue = snapshot.data()?["Current Event"] as? String {
+                completion(fieldValue)
+            } else {
+                print("Field does not exist or has a different type")
+                completion(nil)
+            }
+        }
+    }
     
     
     
