@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RobotSpecsView: View {
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     let teamNumber: String
     
     
@@ -17,18 +17,24 @@ struct RobotSpecsView: View {
         let teamMatches = model.getTeamMatches(teamNumber: teamNumber)
         List {
             Section(){
-                ForEach(teamMatches) { match in
-                    NavigationLink(destination: MatchDetailView(match: match)) {
-                        
-                        MatchCardView(match: match)
- 
-                    }
-                    .listRowBackground(match.win ? Color.blue : Color.red)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            model.deleteMatch(matchToDelete: match)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                
+                if teamMatches.count == 0 {
+                    Text("No Matches Scouted")
+                } else {
+                    
+                    ForEach(teamMatches) { match in
+                        NavigationLink(destination: MatchDetailView(match: match)) {
+                            
+                            MatchCardView(match: match)
+                            
+                        }
+                        .listRowBackground(match.win ? Color.blue : Color.red)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                model.deleteMatch(matchToDelete: match)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
                 }

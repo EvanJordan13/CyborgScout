@@ -7,9 +7,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AppViewModel
-    @EnvironmentObject var user: UserViewModel
-    @ObservedObject var model = AppViewModel()
+    @StateObject var model = AppViewModel.shared
+    @StateObject var user = UserViewModel.sharedUser
+    
     @State var tabSelection = 0
     var body: some View {
         NavigationView {
@@ -45,6 +45,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            
             if UserDefaults.standard.string(forKey: "Current User email") != "" {
                 user.signIn(email: UserDefaults.standard.string(forKey: "Current User Email") ?? "error. Please log back in", password: UserDefaults.standard.string(forKey: "Current User Password") ?? "error. Please log back in")
             } else {

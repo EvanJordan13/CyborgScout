@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
-    @EnvironmentObject var user: UserViewModel
+    @StateObject var user = UserViewModel.sharedUser
     var body: some View {
         NavigationView {
             Section {

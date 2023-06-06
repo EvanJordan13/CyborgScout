@@ -9,13 +9,14 @@ import SwiftUI
 
 struct PitScoutingView: View {
     
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     private enum FieldToFocus: Int, CaseIterable {
         case matchNumber, teamNumber, allianceMember1, allianceMember2
     }
     @FocusState private var focusedField: FieldToFocus?
     @State private var showingAddRobotSuccessAlert = false
     @State private var showingAddRobotFailAlert = false
+    @State private var showingAddRobotFailAlertEvent = false
     @State var scores = [Int]()
     @State var averageScore = 0
     @State var selectedAutos = [String]()
@@ -84,7 +85,12 @@ struct PitScoutingView: View {
                 
                 Button(action: {
                     if ((teamNumber.count > 0)) {
-                        model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos, scores: scores, averageScore: averageScore)
+                        if model.currentEvent == "blank" {
+                            showingAddRobotFailAlertEvent = true
+                        } else {
+                            model.addRobot(teamNumber: teamNumber, drivetrain: selectedDrivetrain, canAutoHigh: canAutoHighScore , canAutoLow: canAutoLowScore, canTeleopHigh: canTeleopHighScore, canTeleopLow: canTeleopLowScore, canTaxi: canTaxi, autos: selectedAutos, scores: scores, averageScore: averageScore)
+                        }
+                        
                         if (model.matchAddFailed == false) {
                             showingAddRobotSuccessAlert = true
                         }
@@ -105,6 +111,9 @@ struct PitScoutingView: View {
                             Button("OK", role: .cancel) { }
                         }
                 .alert("Please Enter Valid Team Number", isPresented: $showingAddRobotFailAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
+                .alert("Please select which event you are scouting for on the home page", isPresented: $showingAddRobotFailAlertEvent) {
                             Button("OK", role: .cancel) { }
                         }
                 

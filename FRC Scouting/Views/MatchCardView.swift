@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MatchCardView: View {
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     let match: Match
 
         var body: some View {

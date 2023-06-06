@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct RobotCardView: View {
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     let robot: Robot
     
     var body: some View {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MatchScoutingView: View {
    
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     private enum FieldToFocus: Int, CaseIterable {
         case matchNumber, teamNumber, allianceMember1, allianceMember2, finalScore
     }

@@ -9,11 +9,8 @@ import SwiftUI
 
 struct DataView: View {
     
-    @ObservedObject var model = AppViewModel()
-    
-    
-    
-    
+    @ObservedObject var model = AppViewModel.shared
+
     var body: some View {
         
         NavigationView {

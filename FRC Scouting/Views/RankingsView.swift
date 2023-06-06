@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RankingsView: View {
-    @ObservedObject var model = AppViewModel()
+    @ObservedObject var model = AppViewModel.shared
     @State var averageScores: [String: Int] = [:] // Dictionary to store average scores
     
     var body: some View {
@@ -37,6 +37,7 @@ struct RankingsView: View {
                 }
             }
             .navigationBarTitle("Rankings")
+            
         }
     }
     

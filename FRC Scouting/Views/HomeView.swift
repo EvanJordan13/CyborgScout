@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject public  var viewModel: AppViewModel
-    @EnvironmentObject var user: UserViewModel
+    @StateObject public var model = AppViewModel.shared
+    @StateObject var user = UserViewModel.sharedUser
     @Binding var tabSelection: Int
     
     var body: some View {
@@ -31,6 +31,8 @@ struct HomeView: View {
                                     Text("Select Event Being Scouted")
                                         .font(.headline)
                                         .accessibilityAddTraits(.isHeader)
+                                    Text("Current Event: \(model.currentEvent)")
+                                        .font(.caption)
                                 }
                             }
                             .padding()
@@ -124,64 +126,42 @@ struct HomeView: View {
                     }
                 }
                 
-//                Section {
-//                    ZStack{
-//                        NavigationLink(destination: EventsView()) {
-//                        }
-//                        .opacity(0.0)
-//                        .buttonStyle(PlainButtonStyle())
-//                        HStack{
-//                            HStack {
-//                                Label("", systemImage: "trophy")
-//                                VStack{
-//                                    Text("View Team Info")
-//                                        .font(.headline)
-//                                        .accessibilityAddTraits(.isHeader)
-//                                }
-//                            }
-//                            .padding()
-//                            .foregroundColor(.primary)
-//                            Spacer()
-//                            Label("", systemImage: "chevron.right")
-//                        }
-//                    }
-//                }
                 
                 
                 
                 
-                
-                                Section {
-                
-                                    ZStack{
-                                        NavigationLink(destination: AccountView()) {
-                                        }
-                                        .opacity(0.0)
-                                        .buttonStyle(PlainButtonStyle())
-                                        HStack{
-                                            HStack {
-                                                Label("", systemImage: "person")
-                                                VStack{
-                                                    Text("View Account")
-                                                        .font(.headline)
-                                                        .accessibilityAddTraits(.isHeader)
-                                                    Text("Logged In As: \(user.user?.username ?? "")")
-                                                        .font(.caption)
-                                                }
-                                            }
-                                            .padding()
-                                            .foregroundColor(.primary)
-                                            Spacer()
-                                            Label("", systemImage: "chevron.right")
-                                        }
-                                    }
+                Section {
+                    
+                    ZStack{
+                        NavigationLink(destination: AccountView()) {
+                        }
+                        .opacity(0.0)
+                        .buttonStyle(PlainButtonStyle())
+                        HStack{
+                            HStack {
+                                Label("", systemImage: "person")
+                                VStack{
+                                    Text("View Account")
+                                        .font(.headline)
+                                        .accessibilityAddTraits(.isHeader)
+                                    Text("Logged In As: \(user.user?.username ?? "")")
+                                        .font(.caption)
                                 }
+                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            Spacer()
+                            Label("", systemImage: "chevron.right")
+                        }
+                    }
+                }
                 
             }
         }
         
         .onAppear {
-            viewModel.storeAllAverageScores()
+            model.storeAllAverageScores()
+            model.storeCurrentEvent()
         }
         
     }

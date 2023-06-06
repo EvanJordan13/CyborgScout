@@ -13,8 +13,8 @@ import FirebaseAuth
 
 struct LoginView: View {
     
-    @EnvironmentObject var viewModel: AppViewModel
-    @EnvironmentObject var user: UserViewModel
+    @StateObject var viewModel = AppViewModel.shared
+    @StateObject var user = UserViewModel.sharedUser
     
     private enum FieldToFocus: Int, CaseIterable {
         case email, password, username

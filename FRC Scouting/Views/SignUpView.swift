@@ -10,8 +10,8 @@ import SwiftUI
 struct SignUpView: View {
     
     
-    @EnvironmentObject var viewModel: AppViewModel
-    @EnvironmentObject var user: UserViewModel
+    @StateObject var viewModel = AppViewModel.shared
+    @StateObject var user = UserViewModel.sharedUser
     
     private enum FieldToFocus: Int, CaseIterable {
         case email, password, username, teamNumber
@@ -25,12 +25,7 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State public var teamNumber = ""
     
-    
-    
-    
-    
-    
-    
+
     var body: some View {
         VStack {
             
@@ -60,7 +55,7 @@ struct SignUpView: View {
                     return
                 }
                 user.signUp(email: email, username: username, teamNumber: teamNumber, password: password)
-
+                
             },
                    
                    label: {

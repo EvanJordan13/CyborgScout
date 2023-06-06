@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
-    @StateObject var model = AppViewModel()
+    @StateObject var model = AppViewModel.shared
     @State var selectedEvent = ""
     @State var showingAddEventSuccessAlert = false
     

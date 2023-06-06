@@ -14,11 +14,17 @@ import FirebaseFirestoreSwift
 import Firebase
 
 class UserViewModel: ObservableObject {
+    
+    //Makes singleton of this class
+    static let sharedUser = UserViewModel()
+    
 
     @Published var user: User?
     
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
+    
+    init() {}
     
     var uuid: String? {
         auth.currentUser?.uid
