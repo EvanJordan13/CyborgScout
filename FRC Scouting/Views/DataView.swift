@@ -18,6 +18,7 @@ struct DataView: View {
             List {
                 Section(header: Text("Robots")){
                     ForEach(model.robots) { robot in
+                        //Error is happening in robotspecs view
                         NavigationLink(destination: RobotSpecsView(teamNumber: robot.teamNumber)) {
                             RobotCardView(robot: robot)
                             
