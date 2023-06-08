@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DataView: View {
     
-    @ObservedObject var model = AppViewModel.shared
+    @StateObject var model = AppViewModel.shared
 
     var body: some View {
         
@@ -38,15 +38,16 @@ struct DataView: View {
                 model.getRobots()
             }
         }
+        .onAppear {
+            model.getRobots()
+        }
         
         
         
         
     }
     
-    init() {
-        model.getRobots()
-    }
+    
 }
 
 struct DataView_Previews: PreviewProvider {

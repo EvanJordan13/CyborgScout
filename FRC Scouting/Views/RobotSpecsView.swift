@@ -8,24 +8,26 @@
 import SwiftUI
 
 struct RobotSpecsView: View {
-    @ObservedObject var model = AppViewModel.shared
+    @StateObject var model = AppViewModel.shared
     let teamNumber: String
     
     
     
     var body: some View {
-        let teamMatches = model.getTeamMatches(teamNumber: teamNumber)
+        var teamMatches = model.getTeamMatches(teamNumber: teamNumber)
         List {
-            Section(){
+            Section() {
                 
                 if teamMatches.count == 0 {
                     Text("No Matches Scouted")
                 } else {
                     
                     ForEach(teamMatches) { match in
+                        
                         NavigationLink(destination: MatchDetailView(match: match)) {
                             
                             MatchCardView(match: match)
+                            
                             
                         }
                         .listRowBackground(match.win ? Color.blue : Color.red)
@@ -40,12 +42,13 @@ struct RobotSpecsView: View {
                 }
             }
             .navigationTitle("Matches")
-            Section {
-                ForEach(model.tbaTeams, id: \.self) { team in
-                    Text(team.nickname)
-                }
-            }
+//            Section {
+//                ForEach(model.tbaTeams, id: \.self) { team in
+//                    Text(team.nickname)
+//                }
+//            }
         }
+        
         .refreshable {
             model.getRobots()
         }
