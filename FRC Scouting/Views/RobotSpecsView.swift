@@ -11,7 +11,7 @@ struct RobotSpecsView: View {
     @StateObject var model = AppViewModel.shared
     let teamNumber: String
     
-    
+    //Error is possibly in modle singleton
     
     var body: some View {
         var teamMatches = model.getTeamMatches(teamNumber: teamNumber)
