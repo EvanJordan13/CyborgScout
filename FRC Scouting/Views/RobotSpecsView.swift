@@ -12,7 +12,7 @@ struct RobotSpecsView: View {
     let teamNumber: String
     
     //Error is possibly in model singleton made in appviewmodel
-    
+    //Error is persisting despite removing appviewmodel singleton
     var body: some View {
         var teamMatches = model.getTeamMatches(teamNumber: teamNumber)
         List {
