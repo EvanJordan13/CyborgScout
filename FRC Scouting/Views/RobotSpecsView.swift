@@ -14,7 +14,8 @@ struct RobotSpecsView: View {
     //Error is possibly in model singleton made in appviewmodel
     //Error is persisting despite removing appviewmodel singleton
     var body: some View {
-        var teamMatches = model.getTeamMatches(teamNumber: teamNumber)
+        
+        let teamMatches = model.getTeamMatches(teamNumber: model.getTeamBeingViewed())
         List {
             Section() {
                 
@@ -23,12 +24,11 @@ struct RobotSpecsView: View {
                 } else {
                     
                     ForEach(teamMatches) { match in
-                        
+                        Text(match.matchNumber)
                         NavigationLink(destination: MatchDetailView(match: match)) {
                             
                             MatchCardView(match: match)
-                            
-                            
+
                         }
                         .listRowBackground(match.win ? Color.blue : Color.red)
                         .swipeActions {
@@ -42,11 +42,10 @@ struct RobotSpecsView: View {
                 }
             }
             .navigationTitle("Matches")
-//            Section {
-//                ForEach(model.tbaTeams, id: \.self) { team in
-//                    Text(team.nickname)
-//                }
-//            }
+
+        }
+        .onAppear {
+            model.storeTeamBeingViewed(teamNumber: teamNumber)
         }
         
         .refreshable {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MatchDetailView: View {
-    @ObservedObject var model = AppViewModel.shared
+    //@ObservedObject var model = AppViewModel.shared
     let match: Match
     
     //multiplies balls scored by each balls point value and returns the sum
