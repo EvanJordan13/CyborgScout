@@ -15,7 +15,7 @@ struct RobotSpecsView: View {
     //Error is persisting despite removing appviewmodel singleton
     var body: some View {
         
-        let teamMatches = model.getTeamMatches(teamNumber: model.getTeamBeingViewed())
+        let teamMatches = model.getTeamMatches(teamNumber: teamNumber)
         List {
             Section() {
                 
@@ -24,7 +24,6 @@ struct RobotSpecsView: View {
                 } else {
                     
                     ForEach(teamMatches) { match in
-                        Text(match.matchNumber)
                         NavigationLink(destination: MatchDetailView(match: match)) {
                             
                             MatchCardView(match: match)
@@ -43,9 +42,6 @@ struct RobotSpecsView: View {
             }
             .navigationTitle("Matches")
 
-        }
-        .onAppear {
-            model.storeTeamBeingViewed(teamNumber: teamNumber)
         }
         
         .refreshable {

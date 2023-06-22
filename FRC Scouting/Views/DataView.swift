@@ -23,9 +23,6 @@ struct DataView: View {
                             RobotCardView(robot: robot)
                             
                         }
-                        .onTapGesture {
-                            model.storeTeamBeingViewed(teamNumber: robot.teamNumber)
-                        }
                         .swipeActions {
                             Button(role: .destructive) {
                                 model.deleteRobot(robotToDelete: robot)

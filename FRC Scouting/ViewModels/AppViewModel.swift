@@ -465,14 +465,6 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    func storeTeamBeingViewed(teamNumber: String) {
-        self.teamBeingViewed = teamNumber
-    }
-    
-    func getTeamBeingViewed() -> String {
-        return self.teamBeingViewed
-    }
-    
     //Needed for getting average scores
     init() {
         getRobots()
