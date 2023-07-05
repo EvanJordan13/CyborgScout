@@ -10,18 +10,23 @@ import SwiftUI
 struct DataView: View {
     
     @StateObject var model = AppViewModel.shared
-
+    @StateObject var robotDataModel = RobotDataViewModel.shared
+    
+    
     var body: some View {
         
         NavigationView {
-            
             List {
                 Section(header: Text("Robots")){
                     ForEach(model.robots) { robot in
                         //Error is happening in robotspecs view
                         NavigationLink(destination: RobotSpecsView(teamNumber: robot.teamNumber)) {
-                            RobotCardView(robot: robot)
                             
+                            Button(action: {robotDataModel.setCurrentTeamNumber(teamNumber: robot.teamNumber)}) {
+                                RobotCardView(robot: robot)
+
+                                }
+                                                        
                         }
                         .swipeActions {
                             Button(role: .destructive) {
@@ -40,6 +45,7 @@ struct DataView: View {
             }
         }
         .onAppear {
+            
             model.getRobots()
         }
         

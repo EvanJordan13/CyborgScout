@@ -9,13 +9,14 @@ import SwiftUI
 
 struct RobotSpecsView: View {
     @StateObject var model = AppViewModel.shared
+    @StateObject var robotDataModel = RobotDataViewModel.shared
     let teamNumber: String
     
     //Error is possibly in model singleton made in appviewmodel
     //Error is persisting despite removing appviewmodel singleton
     var body: some View {
         
-        let teamMatches = model.getTeamMatches(teamNumber: teamNumber)
+        let teamMatches = model.getTeamMatches(teamNumber: robotDataModel.teamNumber)
         List {
             Section() {
                 
@@ -29,6 +30,7 @@ struct RobotSpecsView: View {
                             MatchCardView(match: match)
 
                         }
+                        
                         .listRowBackground(match.win ? Color.blue : Color.red)
                         .swipeActions {
                             Button(role: .destructive) {
@@ -42,6 +44,9 @@ struct RobotSpecsView: View {
             }
             .navigationTitle("Matches")
 
+        }
+        .onAppear {
+            robotDataModel.setCurrentTeamNumber(teamNumber: self.teamNumber)
         }
         
         .refreshable {
