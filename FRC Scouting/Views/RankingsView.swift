@@ -29,7 +29,8 @@ struct RankingsView: View {
                                         }
                                     case .failure(let error):
                                         // Handle the error case here
-                                        print("Error: \(error.localizedDescription)")
+                                        //print("Error: \(error.localizedDescription)")
+                                        return
                                     }
                                 }
                             }

@@ -53,7 +53,7 @@ class AppViewModel: ObservableObject {
                     }
                 }
             } else {
-                print("Fetching Robots Failed")
+                //print("Fetching Robots Failed")
             }
         }
     }
@@ -163,12 +163,12 @@ class AppViewModel: ObservableObject {
         //Add individual score to ranking info section of database to be used in overall ranking calclations
         db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").getDocument { (document, error) in
             if let error = error {
-                print("Error fetching document: \(error.localizedDescription)")
+                //print("Error fetching document: \(error.localizedDescription)")
                 return
             }
             
             guard let document = document, document.exists else {
-                print("Document doesn't exist")
+                //print("Document doesn't exist")
                 return
             }
             
@@ -179,9 +179,9 @@ class AppViewModel: ObservableObject {
             // Update the document with the modified array field
             db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData(["scores": currentScores], merge: true) { error in
                 if let error = error {
-                    print("Error updating document: \(error.localizedDescription)")
+                    //print("Error updating document: \(error.localizedDescription)")
                 } else {
-                    print("Scores appended successfully")
+                    //print("Scores appended successfully")
                 }
             }
         }
@@ -233,12 +233,12 @@ class AppViewModel: ObservableObject {
             
             //Handle errors
             if let error = error {
-                print("Error fetching document: \(error.localizedDescription)")
+                //print("Error fetching document: \(error.localizedDescription)")
                 return
             }
             
             guard let document = document, document.exists else {
-                print("Document doesn't exist")
+                //print("Document doesn't exist")
                 return
             }
             
@@ -262,9 +262,9 @@ class AppViewModel: ObservableObject {
             db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(teamNumber)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": sum/count], merge: true) { error in
                     if let error = error {
-                        print("Error updating document: \(error.localizedDescription)")
+                        //print("Error updating document: \(error.localizedDescription)")
                     } else {
-                        print("Average Score updated successfully")
+                        //print("Average Score updated successfully")
                     }
                 }
         }
@@ -290,12 +290,12 @@ class AppViewModel: ObservableObject {
                 
                 //Handle errors
                 if let error = error {
-                    print("Error fetching document: \(error.localizedDescription)")
+                    //print("Error fetching document: \(error.localizedDescription)")
                     return
                 }
                 
                 guard let document = document, document.exists else {
-                    print("Document doesn't exist")
+                    //print("Document doesn't exist")
                     return
                 }
                 //Set the average score of the current robot to the database's data
@@ -311,9 +311,9 @@ class AppViewModel: ObservableObject {
             db.collection("users").document("\(uid)").collection("Events").document(self.currentEvent).collection("Robots").document("\(team)").collection("Ranking Info").document("Ranking Info").setData([
                 "average score": averageScore], merge: true) { error in
                     if let error = error {
-                        print("Error updating document: \(error.localizedDescription)")
+                        //print("Error updating document: \(error.localizedDescription)")
                     } else {
-                        print("Average Score updated successfully")
+                        //print("Average Score updated successfully")
                     }
                 }
         }
@@ -388,22 +388,22 @@ class AppViewModel: ObservableObject {
             
             let (data, _) = try await URLSession.shared.data(from: url)
             if let decodedResponse = try? JSONDecoder().decode([StatboticsMatch].self, from: data) {
-                print("should have worked")
+                //print("should have worked")
                 DispatchQueue.main.async {
                     self.statboticsMatches = decodedResponse
                 }
                 
             } else {
-                print("didnt decode")
+                //print("didnt decode")
             }
         } catch {
-            print("data isnt valid")
+            //print("data isnt valid")
         }
     }
     
     func fetchStatboticsEvents() async {
         guard let url = URL(string:"https://api.statbotics.io/v2/events/year/2023") else {
-            print("URL doesnt work")
+            //print("URL doesnt work")
             return
         }
         
@@ -411,16 +411,16 @@ class AppViewModel: ObservableObject {
             
             let (data, _) = try await URLSession.shared.data(from: url)
             if let decodedResponse = try? JSONDecoder().decode([StatboticsEvent].self, from: data) {
-                print("should have worked")
+                //print("should have worked")
                 DispatchQueue.main.async {
                     self.statboticsEvents = decodedResponse
                 }
                 
             } else {
-                print("didnt decode")
+                //print("didnt decode")
             }
         } catch {
-            print("data isnt valid")
+            //print("data isnt valid")
         }
     }
     
@@ -435,11 +435,11 @@ class AppViewModel: ObservableObject {
             // Check for errors
             if error == nil {
                 //display succes message
-                print("selected current event succesfull. Current event: \(event)")
+                //print("selected current event succesfull. Current event: \(event)")
             }
             else {
                 // Handle the error
-                print("Selected event assignement failed")
+                //print("Selected event assignement failed")
             }
         }
         storeCurrentEvent()
@@ -460,7 +460,7 @@ class AppViewModel: ObservableObject {
                 }
             } else {
                 //error handling
-                print("Fetching Current Event Failed")
+                //print("Fetching Current Event Failed")
             }
         }
     }

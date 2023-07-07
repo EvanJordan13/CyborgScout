@@ -73,7 +73,7 @@ class UserViewModel: ObservableObject {
             UserDefaults.standard.set("", forKey: "Current User Email")
             UserDefaults.standard.set("", forKey: "Current User Password")
         } catch {
-            print("Error signing out the user: \(error)")
+            //print("Error signing out the user: \(error)")
         }
     }
     
@@ -89,7 +89,7 @@ class UserViewModel: ObservableObject {
             do {
                 try self.user = document!.data(as: User.self)
             } catch {
-                print("Sync error: \(error)")
+                //print("Sync error: \(error)")
             }
         }
     }
@@ -102,7 +102,7 @@ class UserViewModel: ObservableObject {
         do {
             let _ = try db.collection("users").document(self.uuid!).setData(from: user)
         } catch {
-            print("Error adding: \(error)")
+            //print("Error adding: \(error)")
         }
     }
     
@@ -113,7 +113,7 @@ class UserViewModel: ObservableObject {
         do {
             let _ = try db.collection("users").document(self.uuid!).setData(from: self.user)
         } catch {
-            print("Error updating: \(error)")
+            //print("Error updating: \(error)")
         }
     }
 }
