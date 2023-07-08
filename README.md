@@ -1,3 +1,2 @@
-[# CyborgScout
-iOS Application for Scouting FRC teams at FIRST Competitions
-](https://user-images.githubusercontent.com/47465333/252022716-af85fbd0-209d-46b3-84db-e8da2a11b500.png)https://user-images.githubusercontent.com/47465333/252022716-af85fbd0-209d-46b3-84db-e8da2a11b500.png![image](https://github.com/EvanJordan13/CyborgScout/assets/47465333/d720aa27-efaa-4a3c-9496-dc016edb3de1)
+<img width="1349" alt="Screenshot 2023-07-08 at 12 20 40 PM" src="https://github.com/EvanJordan13/CyborgScout/assets/47465333/fc506343-86d6-4b2d-a6c0-50dac924ec0d">
+# Overview
