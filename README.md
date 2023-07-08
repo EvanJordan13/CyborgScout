@@ -3,7 +3,7 @@
 
 # Overview
 
-Cyborg Scout is a robust, all-in-one, cloud based scouting platform for FIRST Robotics Competition Events that allows you to: 
+Cyborg Scout is a robust, all-in-one, cloud based iOS scouting platform for FIRST Robotics Competition Events that allows you to: 
 
 - Select any event to collect data on
 - Collect data on a robot's capabilities (pit scouting)
