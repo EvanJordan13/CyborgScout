@@ -9,7 +9,6 @@ Cyborg Scout is a robust, all-in-one, cloud based iOS scouting platform for FIRS
 - Collect data on a robot's capabilities (pit scouting)
 - Collect data on specific matches
 - Analyze a robot's performance and compare it against other robots
-- Select the most optimal allaince with integrated artificial intelligence alliance selection
-- Collaborate with other users through data sharing and CSV export
+- Select the most optimal allaince with live rankings
+- Collaborate with other users through CSV export
 - See additional data through Statbotics
-  **Table of Contents**
