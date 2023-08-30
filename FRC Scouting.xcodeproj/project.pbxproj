@@ -74,7 +74,7 @@
 		51734121285286B8003052FB /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		5174430C287F344400425B71 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		5174430E287F34F800425B71 /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
-		517DFBD4282867A700109B2D /* FRC Scouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FRC Scouting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		517DFBD4282867A700109B2D /* Cyborg Scout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cyborg Scout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517DFBD7282867A700109B2D /* FRC_ScoutingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRC_ScoutingApp.swift; sourceTree = "<group>"; };
 		517DFBDB282867AB00109B2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		517DFBDE282867AB00109B2D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		517DFBD5282867A700109B2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				517DFBD4282867A700109B2D /* FRC Scouting.app */,
+				517DFBD4282867A700109B2D /* Cyborg Scout.app */,
 				517DFBE4282867AC00109B2D /* FRC ScoutingTests.xctest */,
 				517DFBEE282867AC00109B2D /* FRC ScoutingUITests.xctest */,
 			);
@@ -272,7 +272,7 @@
 				51EE6374289B35940010BEE2 /* SwiftUICharts */,
 			);
 			productName = "FRC Scouting";
-			productReference = 517DFBD4282867A700109B2D /* FRC Scouting.app */;
+			productReference = 517DFBD4282867A700109B2D /* Cyborg Scout.app */;
 			productType = "com.apple.product-type.application";
 		};
 		517DFBE3282867AC00109B2D /* FRC ScoutingTests */ = {
@@ -590,7 +590,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Evan-Jordan.FRC-Scouting";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Cyborg Scout";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -622,7 +622,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Evan-Jordan.FRC-Scouting";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Cyborg Scout";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
